@@ -40,11 +40,17 @@
             openNewToolStripMenuItem = new ToolStripMenuItem();
             saveCurrentToolStripMenuItem = new ToolStripMenuItem();
             clearSpaceToolStripMenuItem = new ToolStripMenuItem();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            label2 = new Label();
+            optionsPanel = new Panel();
+            openFileDialog1 = new OpenFileDialog();
+            saveFileDialog1 = new SaveFileDialog();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             menuStrip1.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -56,6 +62,7 @@
             tableLayoutPanel1.Controls.Add(pictureBox1, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
             tableLayoutPanel1.Controls.Add(menuStrip1, 0, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -76,8 +83,10 @@
             pictureBox1.Margin = new Padding(20);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(938, 444);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Tag = "default";
             // 
             // tableLayoutPanel2
             // 
@@ -133,24 +142,30 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Brightness", "Saturation", "GrayScale", "Contrast", "Blur" });
+            comboBox1.Items.AddRange(new object[] { "Brightness", "Blur", "Contrast", "GrayScale", "Saturation" });
             comboBox1.Location = new Point(5, 7);
             comboBox1.Margin = new Padding(5, 7, 5, 5);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(250, 33);
             comboBox1.TabIndex = 0;
+            comboBox1.SelectedIndexChanged += ComboboxSelectionChanged;
             // 
             // button2
             // 
+            button2.BackColor = Color.DodgerBlue;
             button2.Cursor = Cursors.Hand;
             button2.Dock = DockStyle.Fill;
-            button2.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(3, 55);
+            button2.FlatStyle = FlatStyle.Popup;
+            button2.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.ForeColor = SystemColors.ControlLightLight;
+            button2.Location = new Point(3, 52);
+            button2.Margin = new Padding(3, 0, 3, 3);
             button2.Name = "button2";
-            button2.Size = new Size(254, 47);
+            button2.Size = new Size(254, 50);
             button2.TabIndex = 1;
             button2.Text = "Accept filter";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += AcceptFilterButtonClicked;
             // 
             // menuStrip1
             // 
@@ -174,18 +189,62 @@
             openNewToolStripMenuItem.Name = "openNewToolStripMenuItem";
             openNewToolStripMenuItem.Size = new Size(167, 26);
             openNewToolStripMenuItem.Text = "Open new";
+            openNewToolStripMenuItem.Click += OpenMenuItemClicked;
             // 
             // saveCurrentToolStripMenuItem
             // 
             saveCurrentToolStripMenuItem.Name = "saveCurrentToolStripMenuItem";
             saveCurrentToolStripMenuItem.Size = new Size(167, 26);
             saveCurrentToolStripMenuItem.Text = "Save current";
+            saveCurrentToolStripMenuItem.Click += SaveMenuItemClicked;
             // 
             // clearSpaceToolStripMenuItem
             // 
             clearSpaceToolStripMenuItem.Name = "clearSpaceToolStripMenuItem";
             clearSpaceToolStripMenuItem.Size = new Size(167, 26);
             clearSpaceToolStripMenuItem.Text = "Clear space";
+            clearSpaceToolStripMenuItem.Click += ClearMenuItemClicked;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetDouble;
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(label2, 0, 1);
+            tableLayoutPanel4.Controls.Add(optionsPanel, 0, 0);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(284, 527);
+            tableLayoutPanel4.Margin = new Padding(0);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 2;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 89.89502F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 10.1049843F));
+            tableLayoutPanel4.Size = new Size(697, 181);
+            tableLayoutPanel4.TabIndex = 3;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Right;
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Location = new Point(316, 160);
+            label2.Margin = new Padding(0);
+            label2.Name = "label2";
+            label2.Size = new Size(378, 18);
+            label2.TabIndex = 0;
+            label2.Text = "*Note: don't forget to open image before accepting the filter";
+            // 
+            // optionsPanel
+            // 
+            optionsPanel.Dock = DockStyle.Fill;
+            optionsPanel.Location = new Point(6, 6);
+            optionsPanel.Name = "optionsPanel";
+            optionsPanel.Size = new Size(685, 148);
+            optionsPanel.TabIndex = 1;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -208,6 +267,8 @@
             tableLayoutPanel3.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -225,5 +286,10 @@
         private ToolStripMenuItem openNewToolStripMenuItem;
         private ToolStripMenuItem saveCurrentToolStripMenuItem;
         private ToolStripMenuItem clearSpaceToolStripMenuItem;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Label label2;
+        private Panel optionsPanel;
+        private OpenFileDialog openFileDialog1;
+        private SaveFileDialog saveFileDialog1;
     }
 }
