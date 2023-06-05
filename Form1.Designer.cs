@@ -48,7 +48,6 @@
             optionsPanel = new Panel();
             openFileDialog = new OpenFileDialog();
             saveFileDialog = new SaveFileDialog();
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             tableLayoutPanel2.SuspendLayout();
@@ -319,6 +318,5 @@
         private ToolStripMenuItem sizeModToolStripMenuItem;
         private ToolStripMenuItem zoomToolStripMenuItem;
         private ToolStripMenuItem stretchToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
