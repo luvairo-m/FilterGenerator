@@ -1,6 +1,6 @@
 ﻿namespace FilterGenerator
 {
-    partial class GrayScaleOptions
+    partial class NegativeOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -39,18 +39,18 @@
             label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(188, 21);
-            label1.TabIndex = 0;
+            label1.TabIndex = 1;
             label1.Text = "No options for this filter :(";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // GrayScaleOptions
+            // NegativeOptions
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(label1);
-            Name = "GrayScaleOptions";
-            Text = "GrayScaleOptions";
+            Name = "NegativeOptions";
+            Text = "NegativeOptions";
             ResumeLayout(false);
             PerformLayout();
         }

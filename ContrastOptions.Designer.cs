@@ -30,11 +30,11 @@
         {
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
-            trackBar1 = new TrackBar();
+            trackBar = new TrackBar();
             label = new Label();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -55,7 +55,7 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Controls.Add(trackBar1, 0, 0);
+            tableLayoutPanel1.Controls.Add(trackBar, 0, 0);
             tableLayoutPanel1.Controls.Add(label, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
@@ -66,28 +66,27 @@
             tableLayoutPanel1.Size = new Size(478, 237);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // trackBar1
+            // trackBar
             // 
-            trackBar1.Dock = DockStyle.Fill;
-            trackBar1.Location = new Point(10, 10);
-            trackBar1.Margin = new Padding(10);
-            trackBar1.Maximum = 100;
-            trackBar1.Name = "trackBar1";
-            trackBar1.Size = new Size(458, 98);
-            trackBar1.TabIndex = 0;
-            trackBar1.Value = 50;
-            trackBar1.Scroll += TrackBarScrolled;
+            trackBar.Dock = DockStyle.Fill;
+            trackBar.Location = new Point(10, 10);
+            trackBar.Margin = new Padding(10);
+            trackBar.Minimum = -10;
+            trackBar.Name = "trackBar";
+            trackBar.Size = new Size(458, 98);
+            trackBar.TabIndex = 0;
+            trackBar.Scroll += TrackBarScrolled;
             // 
-            // label1
+            // label
             // 
             label.AutoSize = true;
             label.Dock = DockStyle.Fill;
             label.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label.Location = new Point(3, 118);
-            label.Name = "label1";
+            label.Name = "label";
             label.Size = new Size(472, 119);
             label.TabIndex = 1;
-            label.Text = "Current contrast: 50";
+            label.Text = "Current contrast: 0";
             label.TextAlign = ContentAlignment.TopCenter;
             // 
             // ContrastOptions
@@ -101,7 +100,7 @@
             groupBox1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trackBar).EndInit();
             ResumeLayout(false);
         }
 
@@ -109,7 +108,7 @@
 
         private GroupBox groupBox1;
         private TableLayoutPanel tableLayoutPanel1;
-        private TrackBar trackBar1;
+        private TrackBar trackBar;
         private Label label;
     }
 }

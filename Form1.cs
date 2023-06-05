@@ -1,26 +1,27 @@
 using FilterGenerator.Properties;
-using System.ComponentModel;
 
 namespace FilterGenerator
 {
     public partial class Form1 : Form
     {
         private Image currentImage;
+        private Form currentFilter;
+
         private readonly Image defaultImage = Resources.alpha;
         private const string fileMask = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
 
         private readonly Dictionary<string, Type> formTypes = new()
         {
-            { "Brightness", typeof(BrightnessOptions) },
-            { "Contrast", typeof(ContrastOptions) },
-            { "Saturation", typeof(SaturationOptions) },
-            { "GrayScale", typeof(GrayScaleOptions) },
+            { "Brightness filter", typeof(BrightnessOptions) },
+            { "Contrast filter", typeof(ContrastOptions) },
+            { "GrayScale filter", typeof(GrayScaleOptions) },
+            { "Negative filter", typeof(NegativeOptions) },
+            { "Blur filter", typeof(BlurOptions) },
         };
 
         public Form1()
         {
             InitializeComponent();
-            OpenFilterOptions(new BrightnessOptions());
             comboBox1.SelectedIndex = 0;
 
             openFileDialog.Filter = fileMask;
@@ -37,8 +38,8 @@ namespace FilterGenerator
         private void ComboboxSelectionChanged(object sender, EventArgs e)
         {
             var filterName = ((ComboBox)sender).SelectedItem.ToString();
-            //currentFilter = (Form)Activator.CreateInstance(formTypes[filterName], new[] { currentImage });
-            OpenFilterOptions((Form)Activator.CreateInstance(formTypes[filterName]));
+            currentFilter = (Form)Activator.CreateInstance(formTypes[filterName]);
+            OpenFilterOptions(currentFilter);
         }
 
         private void AcceptFilterButtonClicked(object sender, EventArgs e)
@@ -54,7 +55,8 @@ namespace FilterGenerator
                 return;
             }
 
-            // filtering logic here
+            currentImage = ((IFilter)currentFilter).GetFilteredImage(currentImage);
+            pictureBox.Image = currentImage;
         }
 
         private void OpenFilterOptions(Form form)

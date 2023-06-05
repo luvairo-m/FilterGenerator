@@ -145,7 +145,7 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Brightness", "Blur", "Contrast", "GrayScale", "Saturation" });
+            comboBox1.Items.AddRange(new object[] { "Brightness filter", "Blur filter", "Contrast filter", "GrayScale filter", "Negative filter" });
             comboBox1.Location = new Point(5, 7);
             comboBox1.Margin = new Padding(5, 7, 5, 5);
             comboBox1.Name = "comboBox1";
@@ -212,8 +212,8 @@
             // 
             sizeModToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stretchToolStripMenuItem, zoomToolStripMenuItem });
             sizeModToolStripMenuItem.Name = "sizeModToolStripMenuItem";
-            sizeModToolStripMenuItem.Size = new Size(86, 25);
-            sizeModToolStripMenuItem.Text = "Size mod";
+            sizeModToolStripMenuItem.Size = new Size(94, 25);
+            sizeModToolStripMenuItem.Text = "Size mode";
             // 
             // stretchToolStripMenuItem
             // 
