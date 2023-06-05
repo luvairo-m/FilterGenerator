@@ -1,4 +1,5 @@
 using FilterGenerator.Properties;
+using System.ComponentModel;
 
 namespace FilterGenerator
 {
@@ -6,32 +7,37 @@ namespace FilterGenerator
     {
         private Image currentImage;
         private readonly Image defaultImage = Resources.alpha;
+        private const string fileMask = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
 
         private readonly Dictionary<string, Type> formTypes = new()
         {
             { "Brightness", typeof(BrightnessOptions) },
             { "Contrast", typeof(ContrastOptions) },
             { "Saturation", typeof(SaturationOptions) },
+            { "GrayScale", typeof(GrayScaleOptions) },
         };
 
         public Form1()
         {
             InitializeComponent();
-            comboBox1.SelectedIndex = 0;
             OpenFilterOptions(new BrightnessOptions());
+            comboBox1.SelectedIndex = 0;
 
-            openFileDialog1.Filter = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
-            openFileDialog1.Title = "Image selecting";
+            openFileDialog.Filter = fileMask;
+            openFileDialog.Title = "Image selecting";
 
-            saveFileDialog1.Filter = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
-            saveFileDialog1.Title = "Image saving";
-            //saveFileDialog1.DefaultExt = ".jpg";
-            saveFileDialog1.AddExtension = true;
+            saveFileDialog.Filter = fileMask;
+            saveFileDialog.Title = "Image saving";
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.OverwritePrompt = true;
+
+            stretchToolStripMenuItem.Checked = true;
         }
 
         private void ComboboxSelectionChanged(object sender, EventArgs e)
         {
             var filterName = ((ComboBox)sender).SelectedItem.ToString();
+            //currentFilter = (Form)Activator.CreateInstance(formTypes[filterName], new[] { currentImage });
             OpenFilterOptions((Form)Activator.CreateInstance(formTypes[filterName]));
         }
 
@@ -39,8 +45,12 @@ namespace FilterGenerator
         {
             if (currentImage == null)
             {
-                MessageBox.Show("No image to accept filter on: try to open one",
-                    "Filter error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "No image to accept filter on: try to open one",
+                    "Filter error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return;
             }
 
@@ -60,29 +70,36 @@ namespace FilterGenerator
 
         private void OpenMenuItemClicked(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            currentImage = Image.FromFile(openFileDialog1.FileName);
-            pictureBox1.Image = currentImage;
+            currentImage = Image.FromFile(openFileDialog.FileName);
+            pictureBox.Image = currentImage;
         }
 
         private void SaveMenuItemClicked(object sender, EventArgs e)
         {
             if (currentImage == null)
             {
-                MessageBox.Show("No image to save: try to open one",
-                    "Filter error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "No image to save: try to open one",
+                    "Filter error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
                 return;
             }
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
 
-            currentImage.Save(saveFileDialog1.FileName);
+            currentImage.Save(saveFileDialog.FileName);
 
-            MessageBox.Show("Image successfully saved!",
-                "Saving status: success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(
+                "Image successfully saved!",
+                "Saving status: success",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private void ClearMenuItemClicked(object sender, EventArgs e)
@@ -90,8 +107,22 @@ namespace FilterGenerator
             if (currentImage == null)
                 return;
 
-            pictureBox1.Image = defaultImage;
+            pictureBox.Image = defaultImage;
             currentImage = null;
+        }
+
+        private void ZoomMenuItemClicked(object sender, EventArgs e)
+        {
+            var toolItem = (ToolStripMenuItem)sender;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            (stretchToolStripMenuItem.Checked, toolItem.Checked) = (false, true);
+        }
+
+        private void StretchMenuItemClicked(object sender, EventArgs e)
+        {
+            var toolItem = (ToolStripMenuItem)sender;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            (zoomToolStripMenuItem.Checked, toolItem.Checked) = (false, true);
         }
     }
 }

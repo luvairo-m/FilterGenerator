@@ -2,14 +2,9 @@
 {
     public partial class BrightnessOptions : Form
     {
-        public BrightnessOptions()
-        {
-            InitializeComponent();
-        }
+        public BrightnessOptions() => InitializeComponent();
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            label1.Text = $"Current brightness: {((TrackBar)sender).Value}";
-        }
+        private void TrackBarScrolled(object sender, EventArgs e) =>
+            label.Text = $"Current brightness: {((TrackBar)sender).Value}";
     }
 }

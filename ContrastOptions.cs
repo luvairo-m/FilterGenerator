@@ -2,14 +2,9 @@
 {
     public partial class ContrastOptions : Form
     {
-        public ContrastOptions()
-        {
-            InitializeComponent();
-        }
+        public ContrastOptions() => InitializeComponent();
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            label1.Text = $"Current contrast: {((TrackBar)sender).Value}";
-        }
+        private void TrackBarScrolled(object sender, EventArgs e) =>
+            label.Text = $"Current contrast: {((TrackBar)sender).Value}";
     }
 }

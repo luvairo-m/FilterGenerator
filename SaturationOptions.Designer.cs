@@ -31,7 +31,7 @@
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             trackBar1 = new TrackBar();
-            label1 = new Label();
+            label = new Label();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
@@ -56,7 +56,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Controls.Add(trackBar1, 0, 0);
-            tableLayoutPanel1.Controls.Add(label1, 0, 1);
+            tableLayoutPanel1.Controls.Add(label, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -76,19 +76,19 @@
             trackBar1.Size = new Size(458, 98);
             trackBar1.TabIndex = 0;
             trackBar1.Value = 50;
-            trackBar1.Scroll += trackBar1_Scroll;
+            trackBar1.Scroll += TrackBarScrolled;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(3, 118);
-            label1.Name = "label1";
-            label1.Size = new Size(472, 119);
-            label1.TabIndex = 1;
-            label1.Text = "Current saturation: 50";
-            label1.TextAlign = ContentAlignment.TopCenter;
+            label.AutoSize = true;
+            label.Dock = DockStyle.Fill;
+            label.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label.Location = new Point(3, 118);
+            label.Name = "label1";
+            label.Size = new Size(472, 119);
+            label.TabIndex = 1;
+            label.Text = "Current saturation: 50";
+            label.TextAlign = ContentAlignment.TopCenter;
             // 
             // SaturationOptions
             // 
@@ -110,6 +110,6 @@
         private GroupBox groupBox1;
         private TableLayoutPanel tableLayoutPanel1;
         private TrackBar trackBar1;
-        private Label label1;
+        private Label label;
     }
 }

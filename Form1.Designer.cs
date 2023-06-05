@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
-            pictureBox1 = new PictureBox();
+            pictureBox = new PictureBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -40,13 +40,17 @@
             openNewToolStripMenuItem = new ToolStripMenuItem();
             saveCurrentToolStripMenuItem = new ToolStripMenuItem();
             clearSpaceToolStripMenuItem = new ToolStripMenuItem();
+            sizeModToolStripMenuItem = new ToolStripMenuItem();
+            stretchToolStripMenuItem = new ToolStripMenuItem();
+            zoomToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel4 = new TableLayoutPanel();
             label2 = new Label();
             optionsPanel = new Panel();
-            openFileDialog1 = new OpenFileDialog();
-            saveFileDialog1 = new SaveFileDialog();
+            openFileDialog = new OpenFileDialog();
+            saveFileDialog = new SaveFileDialog();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             menuStrip1.SuspendLayout();
@@ -59,7 +63,7 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28.57143F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 71.42857F));
-            tableLayoutPanel1.Controls.Add(pictureBox1, 0, 1);
+            tableLayoutPanel1.Controls.Add(pictureBox, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
             tableLayoutPanel1.Controls.Add(menuStrip1, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 2);
@@ -73,20 +77,20 @@
             tableLayoutPanel1.Size = new Size(984, 711);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            tableLayoutPanel1.SetColumnSpan(pictureBox1, 2);
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.alpha;
-            pictureBox1.Location = new Point(23, 60);
-            pictureBox1.Margin = new Padding(20);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(938, 444);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Tag = "default";
+            pictureBox.BorderStyle = BorderStyle.FixedSingle;
+            tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
+            pictureBox.Dock = DockStyle.Fill;
+            pictureBox.Image = Properties.Resources.alpha;
+            pictureBox.Location = new Point(23, 60);
+            pictureBox.Margin = new Padding(20);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(938, 444);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.TabIndex = 0;
+            pictureBox.TabStop = false;
+            pictureBox.Tag = "default";
             // 
             // tableLayoutPanel2
             // 
@@ -170,7 +174,7 @@
             // menuStrip1
             // 
             menuStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, sizeModToolStripMenuItem });
             menuStrip1.Location = new Point(3, 3);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(278, 29);
@@ -204,6 +208,27 @@
             clearSpaceToolStripMenuItem.Size = new Size(167, 26);
             clearSpaceToolStripMenuItem.Text = "Clear space";
             clearSpaceToolStripMenuItem.Click += ClearMenuItemClicked;
+            // 
+            // sizeModToolStripMenuItem
+            // 
+            sizeModToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stretchToolStripMenuItem, zoomToolStripMenuItem });
+            sizeModToolStripMenuItem.Name = "sizeModToolStripMenuItem";
+            sizeModToolStripMenuItem.Size = new Size(86, 25);
+            sizeModToolStripMenuItem.Text = "Size mod";
+            // 
+            // stretchToolStripMenuItem
+            // 
+            stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
+            stretchToolStripMenuItem.Size = new Size(128, 26);
+            stretchToolStripMenuItem.Text = "Stretch";
+            stretchToolStripMenuItem.Click += StretchMenuItemClicked;
+            // 
+            // zoomToolStripMenuItem
+            // 
+            zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            zoomToolStripMenuItem.Size = new Size(128, 26);
+            zoomToolStripMenuItem.Text = "Zoom";
+            zoomToolStripMenuItem.Click += ZoomMenuItemClicked;
             // 
             // tableLayoutPanel4
             // 
@@ -242,9 +267,9 @@
             optionsPanel.Size = new Size(685, 148);
             optionsPanel.TabIndex = 1;
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            openFileDialog1.FileName = "openFileDialog1";
+            openFileDialog.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -261,7 +286,7 @@
             Text = "Filter Generator";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
@@ -275,7 +300,7 @@
         #endregion
 
         private TableLayoutPanel tableLayoutPanel1;
-        private PictureBox pictureBox1;
+        private PictureBox pictureBox;
         private TableLayoutPanel tableLayoutPanel2;
         private Label label1;
         private TableLayoutPanel tableLayoutPanel3;
@@ -289,7 +314,11 @@
         private TableLayoutPanel tableLayoutPanel4;
         private Label label2;
         private Panel optionsPanel;
-        private OpenFileDialog openFileDialog1;
-        private SaveFileDialog saveFileDialog1;
+        private OpenFileDialog openFileDialog;
+        private SaveFileDialog saveFileDialog;
+        private ToolStripMenuItem sizeModToolStripMenuItem;
+        private ToolStripMenuItem zoomToolStripMenuItem;
+        private ToolStripMenuItem stretchToolStripMenuItem;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
