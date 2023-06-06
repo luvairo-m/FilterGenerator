@@ -2,11 +2,19 @@
 {
     public partial class BrightnessOptions : Form, IFilter
     {
+        private int? brightnessBuffer;
+
         public BrightnessOptions() => InitializeComponent();
 
         public Image GetFilteredImage(Image image)
         {
             var brightness = trackBar.Value;
+
+            if (brightnessBuffer == brightness)
+                return image;
+
+            if (brightnessBuffer == null)
+                brightnessBuffer = brightness;
 
             var input = new Bitmap(image);
             var bitmap = new Bitmap(input.Width, input.Height);
@@ -17,6 +25,8 @@
                         Color.FromArgb((int)ChangePixelBrightness((uint)input.GetPixel(j, i).ToArgb(),
                         brightness)));
 
+            brightnessBuffer = brightness;
+
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
@@ -26,12 +36,13 @@
         private uint ChangePixelBrightness(uint point, int brightness)
         {
             const int length = 10;
-            int r, g, b;
-            var n = 100 / length * brightness;
+            var value = 100 / length * brightness;
 
-            r = (int)(((point & 0x00FF0000) >> 16) + n * 128 / 100);
-            g = (int)(((point & 0x0000FF00) >> 8) + n * 128 / 100);
-            b = (int)((point & 0x000000FF) + n * 128 / 100);
+            int r, g, b;
+
+            r = (int)(((point & 0x00FF0000) >> 16) + value * 128 / 100);
+            g = (int)(((point & 0x0000FF00) >> 8) + value * 128 / 100);
+            b = (int)((point & 0x000000FF) + value * 128 / 100);
 
             if (r < 0) r = 0;
             if (r > 255) r = 255;

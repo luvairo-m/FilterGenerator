@@ -1,47 +1,41 @@
-﻿using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-
-namespace FilterGenerator
+﻿namespace FilterGenerator
 {
     public partial class NegativeOptions : Form, IFilter
     {
         public NegativeOptions() => InitializeComponent();
 
-        public Image GetFilteredImage(Image source)
+        public Image GetFilteredImage(Image image)
         {
-            var image = new Bitmap(source);
-            var (width, height) = (image.Width, image.Height);
+            var input = new Bitmap(image);
+            var result = new Bitmap(input.Width, input.Height);
 
-            var sourceData = image.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-
-            var bytes = sourceData.Stride * sourceData.Height;
-            var (buffer, result) = (new byte[bytes], new byte[bytes]);
-
-            Marshal.Copy(sourceData.Scan0, buffer, 0, bytes);
-            image.UnlockBits(sourceData);
-
-            var cChannels = 3;
-
-            for (var y = 0; y < height; y++)
-                for (var x = 0; x < width; x++)
+            for (var i = 0; i < input.Height; i++)
+                for (var j = 0; j < input.Width; j++)
                 {
-                    var current = y * sourceData.Stride + x * 4;
+                    var pixel = input.GetPixel(j, i).ToArgb();
 
-                    for (int c = 0; c < cChannels; c++)
-                        result[current + c] = (byte)(255 - buffer[current + c]);
+                    var alpha = (float)((pixel & 0xFF000000) >> 24);
+                    var red = (float)((pixel & 0x00FF0000) >> 16);
+                    var green = (float)((pixel & 0x0000FF00) >> 8);
+                    var blue = (float)(pixel & 0x000000FF);
 
-                    result[current + 3] = 255;
+                    if (redCheck.Checked)
+                        red = 255 - red;
+                    if (greenCheck.Checked)
+                        green = 255 - green;
+                    if (blueCheck.Checked)
+                        blue = 255 - blue;
+
+                    var filteredPixel = 0x00000000 |
+                        ((uint)alpha << 24) | ((uint)red << 16) | ((uint)green << 8) | ((uint)blue);
+
+                    result.SetPixel(j, i, Color.FromArgb((int)filteredPixel));
                 }
 
-            var resultedImage = new Bitmap(width, height);
-            var resultData = resultedImage.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
 
-            Marshal.Copy(result, 0, resultData.Scan0, bytes);
-            resultedImage.UnlockBits(resultData);
-
-            return resultedImage;
+            return result;
         }
     }
 }

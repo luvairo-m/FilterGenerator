@@ -55,7 +55,6 @@
             GC.WaitForPendingFinalizers();
 
             (rBuffer, gBuffer, bBuffer) = (rWeight, gWeight, bWeight);
-
             return bitmap;
         }
 

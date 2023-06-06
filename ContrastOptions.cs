@@ -2,11 +2,19 @@
 {
     public partial class ContrastOptions : Form, IFilter
     {
+        private int? contrastBuffer;
+
         public ContrastOptions() => InitializeComponent();
 
         public Image GetFilteredImage(Image image)
         {
-            var brightness = trackBar.Value;
+            var contrast = trackBar.Value;
+
+            if (contrastBuffer == contrast)
+                return image;
+
+            if (contrastBuffer == null)
+                contrastBuffer = contrast;
 
             var input = new Bitmap(image);
             var bitmap = new Bitmap(input.Width, input.Height);
@@ -15,7 +23,9 @@
                 for (var j = 0; j < input.Width; j++)
                     bitmap.SetPixel(j, i,
                         Color.FromArgb((int)ChangePixelContrast((uint)input.GetPixel(j, i).ToArgb(),
-                        brightness)));
+                        contrast)));
+
+            contrastBuffer = contrast;
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -27,20 +37,20 @@
         {
             const int length = 10;
             int r, g, b;
-            int n = 100 / length * contrast;
+            int value = 100 / length * contrast;
 
-            if (n >= 0)
+            if (value >= 0)
             {
-                if (n == 100) n = 99;
-                r = (int)((((point & 0x00FF0000) >> 16) * 100 - 128 * n) / (100 - n));
-                g = (int)((((point & 0x0000FF00) >> 8) * 100 - 128 * n) / (100 - n));
-                b = (int)(((point & 0x000000FF) * 100 - 128 * n) / (100 - n));
+                if (value == 100) value = 99;
+                r = (int)((((point & 0x00FF0000) >> 16) * 100 - 128 * value) / (100 - value));
+                g = (int)((((point & 0x0000FF00) >> 8) * 100 - 128 * value) / (100 - value));
+                b = (int)(((point & 0x000000FF) * 100 - 128 * value) / (100 - value));
             }
             else
             {
-                r = (int)((((point & 0x00FF0000) >> 16) * (100 - (-n)) + 128 * (-n)) / 100);
-                g = (int)((((point & 0x0000FF00) >> 8) * (100 - (-n)) + 128 * (-n)) / 100);
-                b = (int)(((point & 0x000000FF) * (100 - (-n)) + 128 * (-n)) / 100);
+                r = (int)((((point & 0x00FF0000) >> 16) * (100 - (-value)) + 128 * (-value)) / 100);
+                g = (int)((((point & 0x0000FF00) >> 8) * (100 - (-value)) + 128 * (-value)) / 100);
+                b = (int)(((point & 0x000000FF) * (100 - (-value)) + 128 * (-value)) / 100);
             }
 
             if (r < 0) r = 0;

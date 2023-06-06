@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
-            pictureBox = new PictureBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
             tableLayoutPanel3 = new TableLayoutPanel();
@@ -46,14 +45,17 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             label2 = new Label();
             optionsPanel = new Panel();
+            panel1 = new Panel();
+            pictureBox = new PictureBox();
             openFileDialog = new OpenFileDialog();
             saveFileDialog = new SaveFileDialog();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             menuStrip1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -62,10 +64,10 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28.57143F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 71.42857F));
-            tableLayoutPanel1.Controls.Add(pictureBox, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
             tableLayoutPanel1.Controls.Add(menuStrip1, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 2);
+            tableLayoutPanel1.Controls.Add(panel1, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -75,21 +77,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25.7515526F));
             tableLayoutPanel1.Size = new Size(984, 711);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pictureBox
-            // 
-            pictureBox.BorderStyle = BorderStyle.FixedSingle;
-            tableLayoutPanel1.SetColumnSpan(pictureBox, 2);
-            pictureBox.Dock = DockStyle.Fill;
-            pictureBox.Image = Properties.Resources.alpha;
-            pictureBox.Location = new Point(23, 60);
-            pictureBox.Margin = new Padding(20);
-            pictureBox.Name = "pictureBox";
-            pictureBox.Size = new Size(938, 444);
-            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.TabIndex = 0;
-            pictureBox.TabStop = false;
-            pictureBox.Tag = "default";
             // 
             // tableLayoutPanel2
             // 
@@ -266,6 +253,31 @@
             optionsPanel.Size = new Size(685, 148);
             optionsPanel.TabIndex = 1;
             // 
+            // panel1
+            // 
+            tableLayoutPanel1.SetColumnSpan(panel1, 2);
+            panel1.Controls.Add(pictureBox);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(18, 55);
+            panel1.Margin = new Padding(15);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(948, 454);
+            panel1.TabIndex = 4;
+            // 
+            // pictureBox
+            // 
+            pictureBox.BorderStyle = BorderStyle.FixedSingle;
+            pictureBox.Dock = DockStyle.Fill;
+            pictureBox.Image = Properties.Resources.alpha;
+            pictureBox.Location = new Point(0, 0);
+            pictureBox.Margin = new Padding(20);
+            pictureBox.Name = "pictureBox";
+            pictureBox.Size = new Size(948, 454);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox.TabIndex = 1;
+            pictureBox.TabStop = false;
+            pictureBox.Tag = "default";
+            // 
             // openFileDialog
             // 
             openFileDialog.FileName = "openFileDialog1";
@@ -285,7 +297,6 @@
             Text = "Filter Generator";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
@@ -293,13 +304,14 @@
             menuStrip1.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
+            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private TableLayoutPanel tableLayoutPanel1;
-        private PictureBox pictureBox;
         private TableLayoutPanel tableLayoutPanel2;
         private Label label1;
         private TableLayoutPanel tableLayoutPanel3;
@@ -318,5 +330,7 @@
         private ToolStripMenuItem sizeModToolStripMenuItem;
         private ToolStripMenuItem zoomToolStripMenuItem;
         private ToolStripMenuItem stretchToolStripMenuItem;
+        private Panel panel1;
+        private PictureBox pictureBox;
     }
 }

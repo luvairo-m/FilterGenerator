@@ -9,12 +9,19 @@ namespace FilterGenerator
 
         public Image GetFilteredImage(Image image)
         {
-            if (errorProvider.GetError(textBox1) != string.Empty
-                || errorProvider.GetError(textBox2) != string.Empty
-                || (textBox1.Text == string.Empty && textBox2.Text == string.Empty))
-                return image;
+            if (errorProvider.GetError(textBox2) != string.Empty
+                || textBox2.Text == string.Empty)
+            {
+                MessageBox.Show(
+                    "Bad filter's parameters",
+                    "Filter error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
 
-            var kernel = GetGaussianKernel(int.Parse(textBox1.Text), double.Parse(textBox2.Text));
+                return image;
+            }
+
+            var kernel = GetGaussianKernel(10, double.Parse(textBox2.Text));
             return Convolve(new Bitmap(image), kernel);
         }
 
@@ -101,14 +108,13 @@ namespace FilterGenerator
             return kernel;
         }
 
-        private void RadiusTextBoxChanged(object sender, EventArgs e) =>
-            ValidateIntegerInput(((TextBox)sender).Text);
-
         private void PowerTextBoxChanged(object sender, EventArgs e) =>
-            ValidateDoubleInput(((TextBox)sender).Text);
+            ValidateDoubleInput((TextBox)sender);
 
-        private void ValidateDoubleInput(string line)
+        private void ValidateDoubleInput(TextBox sender)
         {
+            var line = sender.Text;
+
             if (double.TryParse(line, out double value))
             {
                 if (value <= 0d || value > 10d)
@@ -120,21 +126,6 @@ namespace FilterGenerator
             }
 
             errorProvider.SetError(textBox2, "Bad number format");
-        }
-
-        private void ValidateIntegerInput(string line)
-        {
-            if (int.TryParse(line, out int value))
-            {
-                if (value <= 0 || value > 50)
-                    errorProvider.SetError(textBox1, "Radius must be in [0, 50]");
-                else
-                    errorProvider.Clear();
-
-                return;
-            }
-
-            errorProvider.SetError(textBox1, "Bad number format");
         }
     }
 }
