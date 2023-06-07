@@ -69,6 +69,7 @@
             // trackBar
             // 
             trackBar.Dock = DockStyle.Fill;
+            trackBar.LargeChange = 1;
             trackBar.Location = new Point(10, 10);
             trackBar.Margin = new Padding(10);
             trackBar.Minimum = -10;
