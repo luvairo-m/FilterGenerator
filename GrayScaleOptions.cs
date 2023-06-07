@@ -1,10 +1,15 @@
-﻿namespace FilterGenerator
+﻿using System.ComponentModel;
+
+namespace FilterGenerator
 {
     public partial class GrayScaleOptions : Form, IFilter
     {
-        private float? rBuffer, gBuffer, bBuffer;
+        private BackgroundWorker? backgroundWorker;
 
         public GrayScaleOptions() => InitializeComponent();
+
+        public GrayScaleOptions(BackgroundWorker worker) : this()
+            => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)
         {
@@ -13,8 +18,8 @@
                 || blueErrorProvider.GetError(blueWeight) != string.Empty)
             {
                 MessageBox.Show(
-                    "Bad filter's parameters",
-                    "Filter error",
+                    "Неверные настройки фильтра",
+                    "Ошибка фильтрации",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -26,15 +31,11 @@
                 float.Parse(greenWeight.Text),
                 float.Parse(blueWeight.Text));
 
-            if (rBuffer == null && gBuffer == null && bBuffer == null)
-                (rBuffer, gBuffer, bBuffer) = (rWeight, gWeight, bWeight);
-            else if (rWeight == rBuffer && gWeight == gBuffer && bWeight == bBuffer)
-                return image;
-
             var input = new Bitmap(image);
             var bitmap = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < bitmap.Height; i++)
+            {
                 for (var j = 0; j < bitmap.Width; j++)
                 {
                     var pixel = input.GetPixel(j, i).ToArgb();
@@ -51,10 +52,12 @@
                     bitmap.SetPixel(j, i, Color.FromArgb((int)filteredPixel));
                 }
 
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));
+            }
+
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            (rBuffer, gBuffer, bBuffer) = (rWeight, gWeight, bWeight);
             return bitmap;
         }
 
@@ -74,14 +77,14 @@
             if (float.TryParse(input, out float value))
             {
                 if (value < 0 || value > 1)
-                    provider.SetError(sender, "Value must be in [0, 1]");
+                    provider.SetError(sender, "Значение должно принадлежать отрезку: [0, 1]");
                 else
                     provider.Clear();
 
                 return;
             }
 
-            provider.SetError(sender, "Invalid number format, use comma instead of dout");
+            provider.SetError(sender, "Неверный формат числа. Может, Вы используете . вместо , ?");
         }
     }
 }

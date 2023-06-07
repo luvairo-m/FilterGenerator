@@ -48,7 +48,7 @@
             groupBox1.Size = new Size(484, 261);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Contrast options";
+            groupBox1.Text = "Настройки контрастности";
             // 
             // tableLayoutPanel1
             // 
@@ -86,7 +86,7 @@
             label.Name = "label";
             label.Size = new Size(472, 119);
             label.TabIndex = 1;
-            label.Text = "Current contrast: 0";
+            label.Text = "Значение контрастности: 0";
             label.TextAlign = ContentAlignment.TopCenter;
             // 
             // ContrastOptions

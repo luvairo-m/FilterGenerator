@@ -1,8 +1,15 @@
-﻿namespace FilterGenerator
+﻿using System.ComponentModel;
+
+namespace FilterGenerator
 {
     public partial class NegativeOptions : Form, IFilter
     {
+        private BackgroundWorker? backgroundWorker;
+
         public NegativeOptions() => InitializeComponent();
+
+        public NegativeOptions(BackgroundWorker worker) : this()
+            => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)
         {
@@ -10,6 +17,7 @@
             var result = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < input.Height; i++)
+            {
                 for (var j = 0; j < input.Width; j++)
                 {
                     var pixel = input.GetPixel(j, i).ToArgb();
@@ -31,6 +39,9 @@
 
                     result.SetPixel(j, i, Color.FromArgb((int)filteredPixel));
                 }
+
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / result.Height));
+            }
 
             GC.Collect();
             GC.WaitForPendingFinalizers();

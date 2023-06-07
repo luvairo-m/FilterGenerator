@@ -58,7 +58,7 @@
             groupBox1.Size = new Size(484, 261);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "GrayScale options";
+            groupBox1.Text = "Настройки оттенков серого";
             // 
             // tableLayoutPanel1
             // 
@@ -89,9 +89,9 @@
             label5.Location = new Point(15, 156);
             label5.Margin = new Padding(15, 0, 0, 0);
             label5.Name = "label5";
-            label5.Size = new Size(60, 81);
+            label5.Size = new Size(61, 81);
             label5.TabIndex = 4;
-            label5.Text = "Blue weight:";
+            label5.Text = "Вес синего:";
             label5.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label3
@@ -102,9 +102,9 @@
             label3.Location = new Point(15, 78);
             label3.Margin = new Padding(15, 0, 0, 0);
             label3.Name = "label3";
-            label3.Size = new Size(60, 78);
+            label3.Size = new Size(77, 78);
             label3.TabIndex = 2;
-            label3.Text = "Green weight:";
+            label3.Text = "Вес зелёного:";
             label3.TextAlign = ContentAlignment.MiddleRight;
             // 
             // label1
@@ -115,9 +115,9 @@
             label1.Location = new Point(15, 0);
             label1.Margin = new Padding(15, 0, 0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(60, 78);
+            label1.Size = new Size(78, 78);
             label1.TabIndex = 0;
-            label1.Text = "Red weight:";
+            label1.Text = "Вес красного:";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
             // redWeight
@@ -131,6 +131,7 @@
             redWeight.Size = new Size(100, 29);
             redWeight.TabIndex = 5;
             redWeight.Text = "0,2126";
+            redWeight.TextAlign = HorizontalAlignment.Center;
             redToolTip.SetToolTip(redWeight, "default value: 0,2126");
             redWeight.TextChanged += RedWeightTextBoxChanged;
             // 
@@ -145,6 +146,7 @@
             greenWeight.Size = new Size(100, 29);
             greenWeight.TabIndex = 6;
             greenWeight.Text = "0,7152";
+            greenWeight.TextAlign = HorizontalAlignment.Center;
             redToolTip.SetToolTip(greenWeight, "default value: 0,7152");
             greenWeight.TextChanged += GreenWeightTextBoxChanged;
             // 
@@ -160,6 +162,7 @@
             blueWeight.Size = new Size(100, 29);
             blueWeight.TabIndex = 7;
             blueWeight.Text = "0,0722";
+            blueWeight.TextAlign = HorizontalAlignment.Center;
             redToolTip.SetToolTip(blueWeight, "default value: 0,0722");
             blueWeight.TextChanged += BlueWeightTextBoxChanged;
             // 

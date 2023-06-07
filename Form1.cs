@@ -1,9 +1,12 @@
 using FilterGenerator.Properties;
+using System.ComponentModel;
 
 namespace FilterGenerator
 {
     public partial class Form1 : Form
     {
+        private BackgroundWorker worker = new();
+
         private Image currentImage;
         private Form currentFilter;
 
@@ -12,11 +15,12 @@ namespace FilterGenerator
 
         private readonly Dictionary<string, Type> formTypes = new()
         {
-            { "Brightness filter", typeof(BrightnessOptions) },
-            { "Contrast filter", typeof(ContrastOptions) },
-            { "GrayScale filter", typeof(GrayScaleOptions) },
-            { "Negative filter", typeof(NegativeOptions) },
-            { "Blur filter", typeof(BlurOptions) },
+            { "Яркость", typeof(BrightnessOptions) },
+            { "Контрастность", typeof(ContrastOptions) },
+            { "Оттенки серого", typeof(GrayScaleOptions) },
+            { "Инверсия цветов", typeof(NegativeOptions) },
+            { "Размытие", typeof(BlurOptions) },
+            { "Повышение качества", typeof(QualityOptions) },
         };
 
         public Form1()
@@ -33,12 +37,37 @@ namespace FilterGenerator
             saveFileDialog.OverwritePrompt = true;
 
             stretchToolStripMenuItem.Checked = true;
+
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += AsyncImageFiltration;
+            worker.ProgressChanged += ProgressChanged;
+            worker.RunWorkerCompleted += FiltrationCompleted;
+        }
+
+        private void FiltrationCompleted(object? sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar.Value = 0;
+            progressBar.Visible = false;
+        }
+
+        private void ProgressChanged(object? sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+
+            if (progressBar.Value > 1)
+                progressBar.Value = e.ProgressPercentage - 1;
+        }
+
+        private void AsyncImageFiltration(object? sender, DoWorkEventArgs e)
+        {
+            currentImage = ((IFilter)currentFilter).GetFilteredImage(currentImage);
+            pictureBox.Image = currentImage;
         }
 
         private void ComboboxSelectionChanged(object sender, EventArgs e)
         {
             var filterName = ((ComboBox)sender).SelectedItem.ToString();
-            currentFilter = (Form)Activator.CreateInstance(formTypes[filterName]);
+            currentFilter = (Form)Activator.CreateInstance(formTypes[filterName], new object[] { worker });
             OpenFilterOptions(currentFilter);
         }
 
@@ -47,16 +76,27 @@ namespace FilterGenerator
             if (currentImage == null)
             {
                 MessageBox.Show(
-                    "No image to accept filter on: try to open one",
-                    "Filter error",
+                    "Сначала выберите изображение",
+                    "Ошибка фильтрации",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
                 return;
             }
 
-            currentImage = ((IFilter)currentFilter).GetFilteredImage(currentImage);
-            pictureBox.Image = currentImage;
+            if (worker.IsBusy)
+            {
+                MessageBox.Show(
+                    "Дождитесь обработки изображения",
+                    "Предупреждение",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            progressBar.Visible = true;
+            worker.RunWorkerAsync();
         }
 
         private void OpenFilterOptions(Form form)
@@ -84,8 +124,8 @@ namespace FilterGenerator
             if (currentImage == null)
             {
                 MessageBox.Show(
-                    "No image to save: try to open one",
-                    "Filter error",
+                    "Нечего сохранять: изображение не выбрано",
+                    "Ошибка сохранения",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -98,8 +138,8 @@ namespace FilterGenerator
             currentImage.Save(saveFileDialog.FileName);
 
             MessageBox.Show(
-                "Image successfully saved!",
-                "Saving status: success",
+                "Изображение сохранено!",
+                "Сохранение изображения",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }

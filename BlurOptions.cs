@@ -1,11 +1,18 @@
-﻿using System.Drawing.Imaging;
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
 namespace FilterGenerator
 {
     public partial class BlurOptions : Form, IFilter
     {
+        private BackgroundWorker? backgroundWorker;
+
         public BlurOptions() => InitializeComponent();
+
+        public BlurOptions(BackgroundWorker worker) : this()
+            => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)
         {
@@ -13,8 +20,8 @@ namespace FilterGenerator
                 || textBox2.Text == string.Empty)
             {
                 MessageBox.Show(
-                    "Bad filter's parameters",
-                    "Filter error",
+                    "Неверные настройки фильтра",
+                    "Ошибка фильтрации",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
 
@@ -45,6 +52,7 @@ namespace FilterGenerator
             var (kcenter, kpixel) = (0, 0);
 
             for (var y = foff; y < height - foff; y++)
+            {
                 for (var x = foff; x < width - foff; x++)
                 {
                     for (var c = 0; c < colorChannels; c++)
@@ -73,6 +81,9 @@ namespace FilterGenerator
 
                     result[kcenter + 3] = 255;
                 }
+
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)y / (height - foff)));
+            }
 
             Bitmap resultImage = new Bitmap(width, height);
             BitmapData resultData = resultImage.LockBits(new Rectangle(0, 0, width, height),
@@ -118,14 +129,14 @@ namespace FilterGenerator
             if (double.TryParse(line, out double value))
             {
                 if (value <= 0d || value > 10d)
-                    errorProvider.SetError(textBox2, "Power must be in [0, 10]");
+                    errorProvider.SetError(textBox2, "Значение должно принадлежать отрезку: [0, 10]");
                 else
                     errorProvider.Clear();
 
                 return;
             }
 
-            errorProvider.SetError(textBox2, "Bad number format");
+            errorProvider.SetError(textBox2, "Неверный формат числа");
         }
     }
 }

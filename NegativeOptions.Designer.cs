@@ -47,7 +47,7 @@
             groupBox1.Size = new Size(484, 261);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Negative options";
+            groupBox1.Text = "Настройки инверсии цветов";
             // 
             // tableLayoutPanel1
             // 
@@ -80,7 +80,7 @@
             blueCheck.Name = "blueCheck";
             blueCheck.Size = new Size(460, 75);
             blueCheck.TabIndex = 6;
-            blueCheck.Text = "Invert blue";
+            blueCheck.Text = "Инвертировать синий";
             blueCheck.UseVisualStyleBackColor = true;
             // 
             // redCheck
@@ -95,7 +95,7 @@
             redCheck.Name = "redCheck";
             redCheck.Size = new Size(460, 72);
             redCheck.TabIndex = 5;
-            redCheck.Text = "Invert red";
+            redCheck.Text = "Инвертировать красный";
             redCheck.UseVisualStyleBackColor = true;
             // 
             // greenCheck
@@ -110,7 +110,7 @@
             greenCheck.Name = "greenCheck";
             greenCheck.Size = new Size(460, 72);
             greenCheck.TabIndex = 7;
-            greenCheck.Text = "Invert green";
+            greenCheck.Text = "Инвертировать зелёный";
             greenCheck.UseVisualStyleBackColor = true;
             // 
             // NegativeOptions

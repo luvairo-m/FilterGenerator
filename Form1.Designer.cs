@@ -45,7 +45,9 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             label2 = new Label();
             optionsPanel = new Panel();
+            textBox1 = new TextBox();
             panel1 = new Panel();
+            progressBar = new ProgressBar();
             pictureBox = new PictureBox();
             openFileDialog = new OpenFileDialog();
             saveFileDialog = new SaveFileDialog();
@@ -54,6 +56,7 @@
             tableLayoutPanel3.SuspendLayout();
             menuStrip1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
+            optionsPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
@@ -105,7 +108,7 @@
             label1.Name = "label1";
             label1.Size = new Size(260, 55);
             label1.TabIndex = 0;
-            label1.Text = "Select filter type:";
+            label1.Text = "Выберите фильтр:";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel3
@@ -132,7 +135,7 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Brightness filter", "Blur filter", "Contrast filter", "GrayScale filter", "Negative filter" });
+            comboBox1.Items.AddRange(new object[] { "Яркость", "Размытие", "Контрастность", "Оттенки серого", "Инверсия цветов", "Повышение качества" });
             comboBox1.Location = new Point(5, 7);
             comboBox1.Margin = new Padding(5, 7, 5, 5);
             comboBox1.Name = "comboBox1";
@@ -153,7 +156,7 @@
             button2.Name = "button2";
             button2.Size = new Size(254, 50);
             button2.TabIndex = 1;
-            button2.Text = "Accept filter";
+            button2.Text = "Применить";
             button2.UseVisualStyleBackColor = false;
             button2.Click += AcceptFilterButtonClicked;
             // 
@@ -171,49 +174,49 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openNewToolStripMenuItem, saveCurrentToolStripMenuItem, clearSpaceToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(124, 25);
-            fileToolStripMenuItem.Text = "File operations";
+            fileToolStripMenuItem.Size = new Size(59, 25);
+            fileToolStripMenuItem.Text = "Файл";
             // 
             // openNewToolStripMenuItem
             // 
             openNewToolStripMenuItem.Name = "openNewToolStripMenuItem";
-            openNewToolStripMenuItem.Size = new Size(167, 26);
-            openNewToolStripMenuItem.Text = "Open new";
+            openNewToolStripMenuItem.Size = new Size(208, 26);
+            openNewToolStripMenuItem.Text = "Открыть";
             openNewToolStripMenuItem.Click += OpenMenuItemClicked;
             // 
             // saveCurrentToolStripMenuItem
             // 
             saveCurrentToolStripMenuItem.Name = "saveCurrentToolStripMenuItem";
-            saveCurrentToolStripMenuItem.Size = new Size(167, 26);
-            saveCurrentToolStripMenuItem.Text = "Save current";
+            saveCurrentToolStripMenuItem.Size = new Size(208, 26);
+            saveCurrentToolStripMenuItem.Text = "Сохранить";
             saveCurrentToolStripMenuItem.Click += SaveMenuItemClicked;
             // 
             // clearSpaceToolStripMenuItem
             // 
             clearSpaceToolStripMenuItem.Name = "clearSpaceToolStripMenuItem";
-            clearSpaceToolStripMenuItem.Size = new Size(167, 26);
-            clearSpaceToolStripMenuItem.Text = "Clear space";
+            clearSpaceToolStripMenuItem.Size = new Size(208, 26);
+            clearSpaceToolStripMenuItem.Text = "Очистить область";
             clearSpaceToolStripMenuItem.Click += ClearMenuItemClicked;
             // 
             // sizeModToolStripMenuItem
             // 
             sizeModToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stretchToolStripMenuItem, zoomToolStripMenuItem });
             sizeModToolStripMenuItem.Name = "sizeModToolStripMenuItem";
-            sizeModToolStripMenuItem.Size = new Size(94, 25);
-            sizeModToolStripMenuItem.Text = "Size mode";
+            sizeModToolStripMenuItem.Size = new Size(207, 25);
+            sizeModToolStripMenuItem.Text = "Режим масштабирования";
             // 
             // stretchToolStripMenuItem
             // 
             stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
-            stretchToolStripMenuItem.Size = new Size(128, 26);
-            stretchToolStripMenuItem.Text = "Stretch";
+            stretchToolStripMenuItem.Size = new Size(215, 26);
+            stretchToolStripMenuItem.Text = "Вытягивание";
             stretchToolStripMenuItem.Click += StretchMenuItemClicked;
             // 
             // zoomToolStripMenuItem
             // 
             zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
-            zoomToolStripMenuItem.Size = new Size(128, 26);
-            zoomToolStripMenuItem.Text = "Zoom";
+            zoomToolStripMenuItem.Size = new Size(215, 26);
+            zoomToolStripMenuItem.Text = "Пропорционально";
             zoomToolStripMenuItem.Click += ZoomMenuItemClicked;
             // 
             // tableLayoutPanel4
@@ -238,24 +241,33 @@
             label2.AutoSize = true;
             label2.Dock = DockStyle.Right;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(316, 160);
+            label2.Location = new Point(264, 160);
             label2.Margin = new Padding(0);
             label2.Name = "label2";
-            label2.Size = new Size(378, 18);
+            label2.Size = new Size(430, 18);
             label2.TabIndex = 0;
-            label2.Text = "*Note: don't forget to open image before accepting the filter";
+            label2.Text = "*Важно: откройте изображение перед тем, как применять фильтр";
             // 
             // optionsPanel
             // 
+            optionsPanel.Controls.Add(textBox1);
             optionsPanel.Dock = DockStyle.Fill;
             optionsPanel.Location = new Point(6, 6);
             optionsPanel.Name = "optionsPanel";
             optionsPanel.Size = new Size(685, 148);
             optionsPanel.TabIndex = 1;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(487, 18);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 0;
+            // 
             // panel1
             // 
             tableLayoutPanel1.SetColumnSpan(panel1, 2);
+            panel1.Controls.Add(progressBar);
             panel1.Controls.Add(pictureBox);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(18, 55);
@@ -263,6 +275,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(948, 454);
             panel1.TabIndex = 4;
+            // 
+            // progressBar
+            // 
+            progressBar.Location = new Point(282, 195);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new Size(370, 39);
+            progressBar.Step = 1;
+            progressBar.TabIndex = 2;
+            progressBar.Visible = false;
             // 
             // pictureBox
             // 
@@ -304,6 +325,8 @@
             menuStrip1.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
+            optionsPanel.ResumeLayout(false);
+            optionsPanel.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
@@ -332,5 +355,7 @@
         private ToolStripMenuItem stretchToolStripMenuItem;
         private Panel panel1;
         private PictureBox pictureBox;
+        private ProgressBar progressBar;
+        private TextBox textBox1;
     }
 }

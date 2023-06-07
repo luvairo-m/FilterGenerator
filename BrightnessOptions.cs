@@ -1,31 +1,32 @@
-﻿namespace FilterGenerator
+﻿using System.ComponentModel;
+
+namespace FilterGenerator
 {
     public partial class BrightnessOptions : Form, IFilter
     {
-        private int? brightnessBuffer;
+        private BackgroundWorker? backgroundWorker;
+        private int trackbarValue;
 
         public BrightnessOptions() => InitializeComponent();
 
+        public BrightnessOptions(BackgroundWorker worker) : this()
+            => backgroundWorker = worker;
+
         public Image GetFilteredImage(Image image)
         {
-            var brightness = trackBar.Value;
-
-            if (brightnessBuffer == brightness)
-                return image;
-
-            if (brightnessBuffer == null)
-                brightnessBuffer = brightness;
-
+            var brightness = trackbarValue;
             var input = new Bitmap(image);
             var bitmap = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < input.Height; i++)
+            {
                 for (var j = 0; j < input.Width; j++)
                     bitmap.SetPixel(j, i,
                         Color.FromArgb((int)ChangePixelBrightness((uint)input.GetPixel(j, i).ToArgb(),
                         brightness)));
 
-            brightnessBuffer = brightness;
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));
+            }
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -55,7 +56,11 @@
             return point;
         }
 
-        private void TrackBarScrolled(object sender, EventArgs e) =>
-            label.Text = $"Current brightness: {((TrackBar)sender).Value}";
+        private void TrackBarScrolled(object sender, EventArgs e)
+        {
+            var trackbar = sender as TrackBar;
+            label.Text = $"Current brightness: {trackbar!.Value}";
+            trackbarValue = trackbar.Value;
+        }
     }
 }

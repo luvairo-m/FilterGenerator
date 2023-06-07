@@ -53,13 +53,13 @@
             groupBox1.Size = new Size(484, 261);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Blur options";
+            groupBox1.Text = "Настройки размытия";
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.0965652F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 79.9034348F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.901495F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.09851F));
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(textBox2, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -80,22 +80,23 @@
             label1.Location = new Point(15, 0);
             label1.Margin = new Padding(15, 0, 0, 0);
             label1.Name = "label1";
-            label1.Size = new Size(57, 78);
+            label1.Size = new Size(83, 78);
             label1.TabIndex = 0;
-            label1.Text = "Blur power:";
+            label1.Text = "Сила размытия:";
             label1.TextAlign = ContentAlignment.MiddleRight;
             // 
             // textBox2
             // 
             textBox2.Dock = DockStyle.Left;
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(99, 8);
+            textBox2.Location = new Point(117, 8);
             textBox2.Margin = new Padding(3, 8, 3, 3);
             textBox2.MaxLength = 10;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 29);
             textBox2.TabIndex = 5;
             textBox2.Text = "5";
+            textBox2.TextAlign = HorizontalAlignment.Center;
             textBox2.TextChanged += PowerTextBoxChanged;
             // 
             // BlurOptions

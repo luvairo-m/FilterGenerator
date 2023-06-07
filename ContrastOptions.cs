@@ -1,31 +1,32 @@
-﻿namespace FilterGenerator
+﻿using System.ComponentModel;
+
+namespace FilterGenerator
 {
     public partial class ContrastOptions : Form, IFilter
     {
-        private int? contrastBuffer;
+        private BackgroundWorker? backgroundWorker;
+        private int trackbarValue;
 
         public ContrastOptions() => InitializeComponent();
 
+        public ContrastOptions(BackgroundWorker worker) : this()
+            => backgroundWorker = worker;
+
         public Image GetFilteredImage(Image image)
         {
-            var contrast = trackBar.Value;
-
-            if (contrastBuffer == contrast)
-                return image;
-
-            if (contrastBuffer == null)
-                contrastBuffer = contrast;
-
+            var contrast = trackbarValue;
             var input = new Bitmap(image);
             var bitmap = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < input.Height; i++)
+            {
                 for (var j = 0; j < input.Width; j++)
                     bitmap.SetPixel(j, i,
                         Color.FromArgb((int)ChangePixelContrast((uint)input.GetPixel(j, i).ToArgb(),
                         contrast)));
 
-            contrastBuffer = contrast;
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));
+            }
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -64,7 +65,11 @@
             return point;
         }
 
-        private void TrackBarScrolled(object sender, EventArgs e) =>
-            label.Text = $"Current contrast: {((TrackBar)sender).Value}";
+        private void TrackBarScrolled(object sender, EventArgs e)
+        {
+            var trackbar = sender as TrackBar;
+            label.Text = $"Current contrast: {trackbar!.Value}";
+            trackbarValue = trackbar.Value;
+        }
     }
 }

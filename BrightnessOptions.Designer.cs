@@ -48,7 +48,7 @@
             groupBox1.Size = new Size(484, 261);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Brightness options";
+            groupBox1.Text = "Настройки яркости";
             // 
             // tableLayoutPanel1
             // 
@@ -66,13 +66,13 @@
             tableLayoutPanel1.Size = new Size(478, 237);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // trackBar1
+            // trackBar
             // 
             trackBar.Dock = DockStyle.Fill;
             trackBar.Location = new Point(10, 10);
             trackBar.Margin = new Padding(10);
             trackBar.Minimum = -10;
-            trackBar.Name = "trackBar1";
+            trackBar.Name = "trackBar";
             trackBar.Size = new Size(458, 98);
             trackBar.TabIndex = 0;
             trackBar.Scroll += TrackBarScrolled;
@@ -86,7 +86,7 @@
             label.Name = "label";
             label.Size = new Size(472, 119);
             label.TabIndex = 1;
-            label.Text = "Current brightness: 0";
+            label.Text = "Значение яркости: 0";
             label.TextAlign = ContentAlignment.TopCenter;
             // 
             // BrightnessOptions
