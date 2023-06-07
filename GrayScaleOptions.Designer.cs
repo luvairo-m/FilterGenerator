@@ -37,6 +37,7 @@
             redWeight = new TextBox();
             greenWeight = new TextBox();
             blueWeight = new TextBox();
+            button1 = new Button();
             redErrorProvider = new ErrorProvider(components);
             greenErrorProvider = new ErrorProvider(components);
             blueErrorProvider = new ErrorProvider(components);
@@ -62,15 +63,17 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.0965652F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 79.9034348F));
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19.4950047F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.0594559F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.4455471F));
             tableLayoutPanel1.Controls.Add(label5, 0, 2);
             tableLayoutPanel1.Controls.Add(label3, 0, 1);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(redWeight, 1, 0);
             tableLayoutPanel1.Controls.Add(greenWeight, 1, 1);
             tableLayoutPanel1.Controls.Add(blueWeight, 1, 2);
+            tableLayoutPanel1.Controls.Add(button1, 2, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -124,7 +127,7 @@
             // 
             redWeight.Dock = DockStyle.Left;
             redWeight.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            redWeight.Location = new Point(99, 8);
+            redWeight.Location = new Point(96, 8);
             redWeight.Margin = new Padding(3, 8, 3, 3);
             redWeight.MaxLength = 10;
             redWeight.Name = "redWeight";
@@ -139,7 +142,7 @@
             // 
             greenWeight.Dock = DockStyle.Left;
             greenWeight.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            greenWeight.Location = new Point(99, 86);
+            greenWeight.Location = new Point(96, 86);
             greenWeight.Margin = new Padding(3, 8, 3, 3);
             greenWeight.MaxLength = 10;
             greenWeight.Name = "greenWeight";
@@ -155,7 +158,7 @@
             blueWeight.BackColor = SystemColors.Window;
             blueWeight.Dock = DockStyle.Left;
             blueWeight.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            blueWeight.Location = new Point(99, 164);
+            blueWeight.Location = new Point(96, 164);
             blueWeight.Margin = new Padding(3, 8, 3, 3);
             blueWeight.MaxLength = 10;
             blueWeight.Name = "blueWeight";
@@ -165,6 +168,17 @@
             blueWeight.TextAlign = HorizontalAlignment.Center;
             redToolTip.SetToolTip(blueWeight, "default value: 0,0722");
             blueWeight.TextChanged += BlueWeightTextBoxChanged;
+            // 
+            // button1
+            // 
+            button1.Dock = DockStyle.Fill;
+            button1.Location = new Point(411, 159);
+            button1.Name = "button1";
+            button1.Size = new Size(64, 75);
+            button1.TabIndex = 8;
+            button1.Text = "Отменить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BackButtonClicked;
             // 
             // redErrorProvider
             // 
@@ -216,5 +230,6 @@
         private ErrorProvider greenErrorProvider;
         private ErrorProvider blueErrorProvider;
         private ToolTip redToolTip;
+        private Button button1;
     }
 }

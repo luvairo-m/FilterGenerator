@@ -29,13 +29,16 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
+            button1 = new Button();
             groupBox1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(tableLayoutPanel1);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
             groupBox1.Location = new Point(0, 0);
@@ -45,17 +48,44 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Настройки качества";
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 84.00086F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15.99914F));
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(button1, 1, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(3, 21);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 66.46852F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.5314865F));
+            tableLayoutPanel1.Size = new Size(478, 237);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.SetColumnSpan(label1, 2);
+            label1.Dock = DockStyle.Top;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(3, 21);
+            label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(401, 21);
-            label1.TabIndex = 0;
+            label1.Size = new Size(472, 21);
+            label1.TabIndex = 1;
             label1.Text = "У этого фильтра нет настроек: просто примените его :)";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            button1.Dock = DockStyle.Fill;
+            button1.Location = new Point(404, 160);
+            button1.Name = "button1";
+            button1.Size = new Size(71, 74);
+            button1.TabIndex = 0;
+            button1.Text = "Отменить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BackButtonClicked;
             // 
             // QualityOptions
             // 
@@ -66,13 +96,16 @@
             Name = "QualityOptions";
             Text = "QualityOptions";
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox1;
+        private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
+        private Button button1;
     }
 }

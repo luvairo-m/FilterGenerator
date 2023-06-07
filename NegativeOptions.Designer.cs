@@ -33,6 +33,7 @@
             blueCheck = new CheckBox();
             redCheck = new CheckBox();
             greenCheck = new CheckBox();
+            backButton = new Button();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -51,12 +52,13 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 85.76404F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.2359724F));
             tableLayoutPanel1.Controls.Add(blueCheck, 0, 2);
             tableLayoutPanel1.Controls.Add(redCheck, 0, 0);
             tableLayoutPanel1.Controls.Add(greenCheck, 0, 1);
+            tableLayoutPanel1.Controls.Add(backButton, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -64,7 +66,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(478, 237);
             tableLayoutPanel1.TabIndex = 0;
             // 
@@ -78,7 +79,7 @@
             blueCheck.Location = new Point(15, 159);
             blueCheck.Margin = new Padding(15, 3, 3, 3);
             blueCheck.Name = "blueCheck";
-            blueCheck.Size = new Size(460, 75);
+            blueCheck.Size = new Size(391, 75);
             blueCheck.TabIndex = 6;
             blueCheck.Text = "Инвертировать синий";
             blueCheck.UseVisualStyleBackColor = true;
@@ -93,7 +94,7 @@
             redCheck.Location = new Point(15, 3);
             redCheck.Margin = new Padding(15, 3, 3, 3);
             redCheck.Name = "redCheck";
-            redCheck.Size = new Size(460, 72);
+            redCheck.Size = new Size(391, 72);
             redCheck.TabIndex = 5;
             redCheck.Text = "Инвертировать красный";
             redCheck.UseVisualStyleBackColor = true;
@@ -108,10 +109,21 @@
             greenCheck.Location = new Point(15, 81);
             greenCheck.Margin = new Padding(15, 3, 3, 3);
             greenCheck.Name = "greenCheck";
-            greenCheck.Size = new Size(460, 72);
+            greenCheck.Size = new Size(391, 72);
             greenCheck.TabIndex = 7;
             greenCheck.Text = "Инвертировать зелёный";
             greenCheck.UseVisualStyleBackColor = true;
+            // 
+            // backButton
+            // 
+            backButton.Dock = DockStyle.Fill;
+            backButton.Location = new Point(412, 159);
+            backButton.Name = "backButton";
+            backButton.Size = new Size(63, 75);
+            backButton.TabIndex = 8;
+            backButton.Text = "Отменить";
+            backButton.UseVisualStyleBackColor = true;
+            backButton.Click += BackButtonClicked;
             // 
             // NegativeOptions
             // 
@@ -134,5 +146,6 @@
         private CheckBox redCheck;
         private CheckBox blueCheck;
         private CheckBox greenCheck;
+        private Button backButton;
     }
 }

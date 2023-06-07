@@ -6,11 +6,12 @@ namespace FilterGenerator
     {
         private BackgroundWorker? backgroundWorker;
         private Image? imageBuffer;
+        private Form1? baseForm;
 
         public NegativeOptions() => InitializeComponent();
 
-        public NegativeOptions(BackgroundWorker worker) : this()
-            => backgroundWorker = worker;
+        public NegativeOptions(BackgroundWorker worker, Form1 baseForm) : this()
+            => (backgroundWorker, this.baseForm) = (worker, baseForm);
 
         public Image GetFilteredImage(Image image)
         {
@@ -50,6 +51,12 @@ namespace FilterGenerator
             GC.WaitForPendingFinalizers();
 
             return result;
+        }
+
+        private void BackButtonClicked(object sender, EventArgs e)
+        {
+            if (imageBuffer != null)
+                baseForm!.ChangeImage(imageBuffer!);
         }
     }
 }

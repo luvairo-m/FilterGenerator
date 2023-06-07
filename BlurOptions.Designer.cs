@@ -34,6 +34,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             textBox2 = new TextBox();
+            button = new Button();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -57,11 +58,13 @@
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.901495F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 76.09851F));
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.7839031F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.1726151F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.043478F));
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(textBox2, 1, 0);
+            tableLayoutPanel1.Controls.Add(button, 2, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -89,7 +92,7 @@
             // 
             textBox2.Dock = DockStyle.Left;
             textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(117, 8);
+            textBox2.Location = new Point(102, 8);
             textBox2.Margin = new Padding(3, 8, 3, 3);
             textBox2.MaxLength = 10;
             textBox2.Name = "textBox2";
@@ -98,6 +101,17 @@
             textBox2.Text = "5";
             textBox2.TextAlign = HorizontalAlignment.Center;
             textBox2.TextChanged += PowerTextBoxChanged;
+            // 
+            // button
+            // 
+            button.Dock = DockStyle.Fill;
+            button.Location = new Point(418, 159);
+            button.Name = "button";
+            button.Size = new Size(57, 75);
+            button.TabIndex = 6;
+            button.Text = "Отменить";
+            button.UseVisualStyleBackColor = true;
+            button.Click += BackButtonClicked;
             // 
             // BlurOptions
             // 
@@ -120,5 +134,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private TextBox textBox2;
+        private Button button;
     }
 }

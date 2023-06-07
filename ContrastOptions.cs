@@ -10,7 +10,7 @@ namespace FilterGenerator
 
         public ContrastOptions() => InitializeComponent();
 
-        public ContrastOptions(BackgroundWorker worker) : this()
+        public ContrastOptions(BackgroundWorker worker, Form1 baseForm) : this()
             => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)

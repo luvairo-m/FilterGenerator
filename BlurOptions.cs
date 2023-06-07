@@ -8,11 +8,12 @@ namespace FilterGenerator
     {
         private BackgroundWorker? backgroundWorker;
         private Image? imageBuffer;
+        private Form1? baseForm;
 
         public BlurOptions() => InitializeComponent();
 
-        public BlurOptions(BackgroundWorker worker) : this()
-            => backgroundWorker = worker;
+        public BlurOptions(BackgroundWorker worker, Form1 baseForm) : this()
+            => (backgroundWorker, this.baseForm) = (worker, baseForm);
 
         public Image GetFilteredImage(Image image)
         {
@@ -139,6 +140,12 @@ namespace FilterGenerator
             }
 
             errorProvider.SetError(textBox2, "Неверный формат числа");
+        }
+
+        private void BackButtonClicked(object sender, EventArgs e)
+        {
+            if (imageBuffer != null)
+                baseForm!.ChangeImage(imageBuffer);
         }
     }
 }

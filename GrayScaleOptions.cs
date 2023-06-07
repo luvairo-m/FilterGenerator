@@ -6,11 +6,12 @@ namespace FilterGenerator
     {
         private BackgroundWorker? backgroundWorker;
         private Image? imageBuffer;
+        private Form1? baseForm;
 
         public GrayScaleOptions() => InitializeComponent();
 
-        public GrayScaleOptions(BackgroundWorker worker) : this()
-            => backgroundWorker = worker;
+        public GrayScaleOptions(BackgroundWorker worker, Form1 baseForm) : this()
+            => (backgroundWorker, this.baseForm) = (worker, baseForm);
 
         public Image GetFilteredImage(Image image)
         {
@@ -88,6 +89,12 @@ namespace FilterGenerator
             }
 
             provider.SetError(sender, "Неверный формат числа. Может, Вы используете . вместо , ?");
+        }
+
+        private void BackButtonClicked(object sender, EventArgs e)
+        {
+            if (imageBuffer != null)
+                baseForm!.ChangeImage(imageBuffer);
         }
     }
 }

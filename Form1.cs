@@ -7,8 +7,8 @@ namespace FilterGenerator
     {
         private BackgroundWorker worker = new();
 
-        private Image currentImage;
-        private Form currentFilter;
+        private Image? currentImage;
+        private Form? currentFilter;
 
         private readonly Image defaultImage = Resources.alpha;
         private const string fileMask = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
@@ -45,6 +45,12 @@ namespace FilterGenerator
             worker.RunWorkerCompleted += FiltrationCompleted;
         }
 
+        public void ChangeImage(Image image)
+        {
+            currentImage = image;
+            pictureBox.Image = image;
+        }
+
         private void FiltrationCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             progressBar.Value = 0;
@@ -61,15 +67,15 @@ namespace FilterGenerator
 
         private void AsyncImageFiltration(object? sender, DoWorkEventArgs e)
         {
-            currentImage = ((IFilter)currentFilter).GetFilteredImage(currentImage);
+            currentImage = ((IFilter)currentFilter!).GetFilteredImage(currentImage!);
             pictureBox.Image = currentImage;
         }
 
         private void ComboboxSelectionChanged(object sender, EventArgs e)
         {
             var filterName = ((ComboBox)sender).SelectedItem.ToString();
-            currentFilter = (Form)Activator.CreateInstance(formTypes[filterName], new object[] { worker });
-            OpenFilterOptions(currentFilter);
+            currentFilter = (Form)Activator.CreateInstance(formTypes[filterName!], new object[] { worker, this })!;
+            OpenFilterOptions(currentFilter!);
         }
 
         private void AcceptFilterButtonClicked(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace FilterGenerator
 
         public AlphaOptions() => InitializeComponent();
 
-        public AlphaOptions(BackgroundWorker worker) : this()
+        public AlphaOptions(BackgroundWorker worker, Form1 baseForm) : this()
             => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)

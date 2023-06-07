@@ -10,7 +10,7 @@ namespace FilterGenerator
 
         public BrightnessOptions() => InitializeComponent();
 
-        public BrightnessOptions(BackgroundWorker worker) : this()
+        public BrightnessOptions(BackgroundWorker worker, Form1 baseForm) : this()
             => backgroundWorker = worker;
 
         public Image GetFilteredImage(Image image)
