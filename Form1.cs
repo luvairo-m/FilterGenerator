@@ -21,6 +21,7 @@ namespace FilterGenerator
             { "Инверсия цветов", typeof(NegativeOptions) },
             { "Размытие", typeof(BlurOptions) },
             { "Повышение качества", typeof(QualityOptions) },
+            { "Прозрачность", typeof(AlphaOptions) },
         };
 
         public Form1()

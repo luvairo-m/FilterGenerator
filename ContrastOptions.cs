@@ -5,6 +5,7 @@ namespace FilterGenerator
     public partial class ContrastOptions : Form, IFilter
     {
         private BackgroundWorker? backgroundWorker;
+        private Image? imageBuffer;
         private int trackbarValue;
 
         public ContrastOptions() => InitializeComponent();
@@ -14,8 +15,10 @@ namespace FilterGenerator
 
         public Image GetFilteredImage(Image image)
         {
+            imageBuffer ??= image;
+
             var contrast = trackbarValue;
-            var input = new Bitmap(image);
+            var input = new Bitmap(imageBuffer);
             var bitmap = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < input.Height; i++)
@@ -68,7 +71,7 @@ namespace FilterGenerator
         private void TrackBarScrolled(object sender, EventArgs e)
         {
             var trackbar = sender as TrackBar;
-            label.Text = $"Current contrast: {trackbar!.Value}";
+            label.Text = $"Значение контрастности: {trackbar!.Value}";
             trackbarValue = trackbar.Value;
         }
     }

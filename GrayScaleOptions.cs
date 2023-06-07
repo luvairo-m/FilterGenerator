@@ -5,6 +5,7 @@ namespace FilterGenerator
     public partial class GrayScaleOptions : Form, IFilter
     {
         private BackgroundWorker? backgroundWorker;
+        private Image? imageBuffer;
 
         public GrayScaleOptions() => InitializeComponent();
 
@@ -26,12 +27,14 @@ namespace FilterGenerator
                 return image;
             }
 
+            imageBuffer ??= image;
+
             var (rWeight, gWeight, bWeight) =
                 (float.Parse(redWeight.Text),
                 float.Parse(greenWeight.Text),
                 float.Parse(blueWeight.Text));
 
-            var input = new Bitmap(image);
+            var input = new Bitmap(imageBuffer);
             var bitmap = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < bitmap.Height; i++)

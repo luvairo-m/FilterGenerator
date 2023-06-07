@@ -135,7 +135,7 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Яркость", "Размытие", "Контрастность", "Оттенки серого", "Инверсия цветов", "Повышение качества" });
+            comboBox1.Items.AddRange(new object[] { "Яркость", "Размытие", "Контрастность", "Оттенки серого", "Инверсия цветов", "Прозрачность", "Повышение качества" });
             comboBox1.Location = new Point(5, 7);
             comboBox1.Margin = new Padding(5, 7, 5, 5);
             comboBox1.Name = "comboBox1";

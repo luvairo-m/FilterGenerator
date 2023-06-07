@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
@@ -8,6 +7,7 @@ namespace FilterGenerator
     public partial class BlurOptions : Form, IFilter
     {
         private BackgroundWorker? backgroundWorker;
+        private Image? imageBuffer;
 
         public BlurOptions() => InitializeComponent();
 
@@ -28,8 +28,10 @@ namespace FilterGenerator
                 return image;
             }
 
+            imageBuffer ??= image;
+
             var kernel = GetGaussianKernel(10, double.Parse(textBox2.Text));
-            return Convolve(new Bitmap(image), kernel);
+            return Convolve(new Bitmap(imageBuffer), kernel);
         }
 
         private Image Convolve(Bitmap sourceImage, double[,] kernel)

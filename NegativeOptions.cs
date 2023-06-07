@@ -5,6 +5,7 @@ namespace FilterGenerator
     public partial class NegativeOptions : Form, IFilter
     {
         private BackgroundWorker? backgroundWorker;
+        private Image? imageBuffer;
 
         public NegativeOptions() => InitializeComponent();
 
@@ -13,7 +14,9 @@ namespace FilterGenerator
 
         public Image GetFilteredImage(Image image)
         {
-            var input = new Bitmap(image);
+            imageBuffer ??= image;
+
+            var input = new Bitmap(imageBuffer);
             var result = new Bitmap(input.Width, input.Height);
 
             for (var i = 0; i < input.Height; i++)

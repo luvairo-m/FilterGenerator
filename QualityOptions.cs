@@ -5,6 +5,7 @@ namespace FilterGenerator
     public partial class QualityOptions : Form, IFilter
     {
         private BackgroundWorker? backgroundWorker;
+        private Image? imageBuffer;
 
         public QualityOptions() => InitializeComponent();
 
@@ -13,7 +14,9 @@ namespace FilterGenerator
 
         public Image GetFilteredImage(Image image)
         {
-            var input = new Bitmap(image);
+            imageBuffer ??= image;
+
+            var input = new Bitmap(imageBuffer);
             var output = new Bitmap(input.Width, input.Height); 
 
             for (var i = 1; i < input.Height - 1; i++)
