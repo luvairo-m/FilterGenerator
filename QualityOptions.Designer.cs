@@ -30,8 +30,8 @@
         {
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
-            label1 = new Label();
             button1 = new Button();
+            label1 = new Label();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
@@ -44,48 +44,52 @@
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(484, 261);
-            groupBox1.TabIndex = 0;
+            groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Настройки качества";
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 84.00086F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15.99914F));
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19.4950047F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.0594559F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.4455471F));
+            tableLayoutPanel1.Controls.Add(button1, 2, 2);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
-            tableLayoutPanel1.Controls.Add(button1, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 66.46852F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.5314865F));
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Size = new Size(478, 237);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            button1.Dock = DockStyle.Fill;
+            button1.Location = new Point(411, 159);
+            button1.Name = "button1";
+            button1.Size = new Size(64, 75);
+            button1.TabIndex = 8;
+            button1.Text = "Отменить";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BackButtonClicked;
             // 
             // label1
             // 
             label1.AutoSize = true;
             tableLayoutPanel1.SetColumnSpan(label1, 2);
-            label1.Dock = DockStyle.Top;
+            label1.Dock = DockStyle.Fill;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(3, 0);
+            label1.Location = new Point(0, 0);
+            label1.Margin = new Padding(0, 0, 3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(472, 21);
-            label1.TabIndex = 1;
-            label1.Text = "У этого фильтра нет настроек: просто примените его :)";
-            // 
-            // button1
-            // 
-            button1.Dock = DockStyle.Fill;
-            button1.Location = new Point(404, 160);
-            button1.Name = "button1";
-            button1.Size = new Size(71, 74);
-            button1.TabIndex = 0;
-            button1.Text = "Отменить";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += BackButtonClicked;
+            label1.Size = new Size(405, 78);
+            label1.TabIndex = 9;
+            label1.Text = "Нет настроек. Просто примените фильтр :)";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // QualityOptions
             // 
@@ -105,7 +109,7 @@
 
         private GroupBox groupBox1;
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label1;
         private Button button1;
+        private Label label1;
     }
 }
