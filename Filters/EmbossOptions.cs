@@ -3,36 +3,53 @@ using System.ComponentModel;
 
 namespace FilterGenerator.Filters
 {
-    public partial class BlurOptions : Form, IFilter
+    public partial class EmbossOptions : Form, IFilter
     {
+        private int[,] bothKernel = new int[,]
+        {
+            { -1, -1, -1 },
+            { -1, 8, -1 },
+            { -1, -1, -1 },
+        };
+
+        private int[,] horizontalKernel = new int[,]
+        {
+            { 0, 0, 0 },
+            { -1, 2, -1 },
+            { 0, 0, 0 },
+        };
+
+        private int[,] verticalKernel = new int[,]
+        {
+            { 0, -1, 0 },
+            { 0, 0, 0 },
+            { 0, 1, 0 },
+        };
+
         private BackgroundWorker? backgroundWorker;
         private Image? imageBuffer;
         private Form1? baseForm;
 
-        public BlurOptions() => InitializeComponent();
+        public EmbossOptions() => InitializeComponent();
 
-        public BlurOptions(BackgroundWorker worker, Form1 baseForm) : this()
+        public EmbossOptions(BackgroundWorker worker, Form1 baseForm) : this()
             => (backgroundWorker, this.baseForm) = (worker, baseForm);
 
         public Image GetFilteredImage(Image image)
         {
             imageBuffer ??= image;
 
-            var kernelSize = 0;
-            if (lowBlurRadio.Checked) kernelSize = 11;
-            else if (middleBlurRadio.Checked) kernelSize = 21;
-            else if (highBlurRadio.Checked) kernelSize = 31;
+            var embossKernel = bothKernel;
+
+            if (horizontalRadio.Checked) embossKernel = horizontalKernel;
+            else if (verticalRadio.Checked) embossKernel = verticalKernel;
+            else if (bothRadio.Checked) embossKernel = bothKernel;
 
             var output = new Bitmap(imageBuffer.Width, imageBuffer.Height);
-            var kernel = new float[kernelSize, kernelSize];
 
-            for (var i = 0; i < kernel.GetLength(0); i++)
-                for (var j = 0; j < kernel.GetLength(1); j++)
-                    kernel[i, j] = 1.0f / kernel.Length;
-
-            var offset = kernel.GetLength(0) / 2;
+            var offset = embossKernel.GetLength(0) / 2;
             var extendedMatrix = ImageUtils.GetExtendedByKernelImageMatrix(
-                ImageUtils.GetImageMatrix(imageBuffer), kernel.GetLength(0));
+                ImageUtils.GetImageMatrix(imageBuffer), embossKernel.GetLength(0));
 
             for (var i = offset; i < extendedMatrix.GetLength(0) - offset; i++)
             {
@@ -46,10 +63,14 @@ namespace FilterGenerator.Filters
                         for (var y = j - offset; y <= j + offset; y++)
                         {
                             var (_, r, g, b) = ImageUtils.DecomposeColor(extendedMatrix[x, y]);
-                            red += r * kernel[x - iBuffer, y - jBuffer];
-                            green += g * kernel[x - iBuffer, y - jBuffer];
-                            blue += b * kernel[x - iBuffer, y - jBuffer];
+                            red += r * embossKernel[x - iBuffer, y - jBuffer];
+                            green += g * embossKernel[x - iBuffer, y - jBuffer];
+                            blue += b * embossKernel[x - iBuffer, y - jBuffer];
                         }
+
+                    red += 127;
+                    green += 127;
+                    blue += 127;
 
                     ImageUtils.ControlChannelsOverflow(ref red, ref green, ref blue);
                     output.SetPixel(j - offset, i - offset, ImageUtils.ComposeColor((alpha, (int)red, (int)green, (int)blue)));

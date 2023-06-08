@@ -23,6 +23,7 @@ namespace FilterGenerator
             { "Размытие", typeof(BlurOptions) },
             { "Повышение качества", typeof(QualityOptions) },
             { "Прозрачность", typeof(AlphaOptions) },
+            { "Лапласское тиснение", typeof(EmbossOptions) },
         };
 
         public Form1()
