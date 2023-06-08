@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
@@ -45,7 +46,6 @@
             tableLayoutPanel4 = new TableLayoutPanel();
             label2 = new Label();
             optionsPanel = new Panel();
-            textBox1 = new TextBox();
             panel1 = new Panel();
             progressBar = new ProgressBar();
             pictureBox = new PictureBox();
@@ -56,7 +56,6 @@
             tableLayoutPanel3.SuspendLayout();
             menuStrip1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
-            optionsPanel.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox).BeginInit();
             SuspendLayout();
@@ -173,12 +172,14 @@
             // fileToolStripMenuItem
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openNewToolStripMenuItem, saveCurrentToolStripMenuItem, clearSpaceToolStripMenuItem });
+            fileToolStripMenuItem.Image = Properties.Resources.file_operations_image;
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(59, 25);
+            fileToolStripMenuItem.Size = new Size(75, 25);
             fileToolStripMenuItem.Text = "Файл";
             // 
             // openNewToolStripMenuItem
             // 
+            openNewToolStripMenuItem.Image = Properties.Resources.open_image;
             openNewToolStripMenuItem.Name = "openNewToolStripMenuItem";
             openNewToolStripMenuItem.Size = new Size(208, 26);
             openNewToolStripMenuItem.Text = "Открыть";
@@ -186,6 +187,7 @@
             // 
             // saveCurrentToolStripMenuItem
             // 
+            saveCurrentToolStripMenuItem.Image = Properties.Resources.save_as_image;
             saveCurrentToolStripMenuItem.Name = "saveCurrentToolStripMenuItem";
             saveCurrentToolStripMenuItem.Size = new Size(208, 26);
             saveCurrentToolStripMenuItem.Text = "Сохранить";
@@ -193,6 +195,7 @@
             // 
             // clearSpaceToolStripMenuItem
             // 
+            clearSpaceToolStripMenuItem.Image = Properties.Resources.clear_image;
             clearSpaceToolStripMenuItem.Name = "clearSpaceToolStripMenuItem";
             clearSpaceToolStripMenuItem.Size = new Size(208, 26);
             clearSpaceToolStripMenuItem.Text = "Очистить область";
@@ -201,12 +204,14 @@
             // sizeModToolStripMenuItem
             // 
             sizeModToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stretchToolStripMenuItem, zoomToolStripMenuItem });
+            sizeModToolStripMenuItem.Image = Properties.Resources.size_image;
             sizeModToolStripMenuItem.Name = "sizeModToolStripMenuItem";
-            sizeModToolStripMenuItem.Size = new Size(207, 25);
-            sizeModToolStripMenuItem.Text = "Режим масштабирования";
+            sizeModToolStripMenuItem.Size = new Size(173, 25);
+            sizeModToolStripMenuItem.Text = "Машстабирование";
             // 
             // stretchToolStripMenuItem
             // 
+            stretchToolStripMenuItem.Image = Properties.Resources.fit_image;
             stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
             stretchToolStripMenuItem.Size = new Size(215, 26);
             stretchToolStripMenuItem.Text = "Вытягивание";
@@ -214,6 +219,7 @@
             // 
             // zoomToolStripMenuItem
             // 
+            zoomToolStripMenuItem.Image = Properties.Resources.zoom_image;
             zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
             zoomToolStripMenuItem.Size = new Size(215, 26);
             zoomToolStripMenuItem.Text = "Пропорционально";
@@ -250,19 +256,11 @@
             // 
             // optionsPanel
             // 
-            optionsPanel.Controls.Add(textBox1);
             optionsPanel.Dock = DockStyle.Fill;
             optionsPanel.Location = new Point(6, 6);
             optionsPanel.Name = "optionsPanel";
             optionsPanel.Size = new Size(685, 148);
             optionsPanel.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(487, 18);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 0;
             // 
             // panel1
             // 
@@ -311,6 +309,7 @@
             Controls.Add(tableLayoutPanel1);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             Name = "Form1";
@@ -325,8 +324,6 @@
             menuStrip1.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
             tableLayoutPanel4.PerformLayout();
-            optionsPanel.ResumeLayout(false);
-            optionsPanel.PerformLayout();
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox).EndInit();
             ResumeLayout(false);
@@ -356,6 +353,5 @@
         private Panel panel1;
         private PictureBox pictureBox;
         private ProgressBar progressBar;
-        private TextBox textBox1;
     }
 }

@@ -121,4 +121,25 @@
   <data name="alpha" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\alpha.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="clear_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clear-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="file_operations_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\file-operations-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fit_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fit-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="open_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\open-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="save_as_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\save-as-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="size_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\size-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom-image.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
