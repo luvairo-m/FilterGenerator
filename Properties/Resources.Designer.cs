@@ -73,9 +73,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap clear_image {
+        internal static System.Drawing.Bitmap clear {
             get {
-                object obj = ResourceManager.GetObject("clear_image", resourceCulture);
+                object obj = ResourceManager.GetObject("clear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap file_operations_image {
+        internal static System.Drawing.Bitmap maximaze {
             get {
-                object obj = ResourceManager.GetObject("file_operations_image", resourceCulture);
+                object obj = ResourceManager.GetObject("maximaze", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fit_image {
+        internal static System.Drawing.Bitmap open_file {
             get {
-                object obj = ResourceManager.GetObject("fit_image", resourceCulture);
+                object obj = ResourceManager.GetObject("open_file", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap open_image {
+        internal static System.Drawing.Bitmap open_folder {
             get {
-                object obj = ResourceManager.GetObject("open_image", resourceCulture);
+                object obj = ResourceManager.GetObject("open_folder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap save_as_image {
+        internal static System.Drawing.Bitmap save {
             get {
-                object obj = ResourceManager.GetObject("save_as_image", resourceCulture);
+                object obj = ResourceManager.GetObject("save", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap size_image {
+        internal static System.Drawing.Bitmap scale {
             get {
-                object obj = ResourceManager.GetObject("size_image", resourceCulture);
+                object obj = ResourceManager.GetObject("scale", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace FilterGenerator.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap zoom_image {
+        internal static System.Drawing.Bitmap zoom {
             get {
-                object obj = ResourceManager.GetObject("zoom_image", resourceCulture);
+                object obj = ResourceManager.GetObject("zoom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

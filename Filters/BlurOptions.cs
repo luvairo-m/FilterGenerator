@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
+﻿using FilterGenerator.Extra;
 using FilterGenerator.Filters;
+using System.ComponentModel;
 
 namespace FilterGenerator
 {
@@ -18,129 +17,49 @@ namespace FilterGenerator
 
         public Image GetFilteredImage(Image image)
         {
-            if (errorProvider.GetError(textBox2) != string.Empty
-                || textBox2.Text == string.Empty)
-            {
-                MessageBox.Show(
-                    "Неверные настройки фильтра",
-                    "Ошибка фильтрации",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
-                return image;
-            }
-
             imageBuffer ??= image;
 
-            var kernel = GetGaussianKernel(10, double.Parse(textBox2.Text));
-            return Convolve(new Bitmap(imageBuffer), kernel);
-        }
+            var kernelSize = 0;
+            if (lowBlurRadio.Checked) kernelSize = 11;
+            else if (middleBlurRadio.Checked) kernelSize = 21;
+            else if (highBlurRadio.Checked) kernelSize = 31;
 
-        private Image Convolve(Bitmap sourceImage, double[,] kernel)
-        {
-            var (width, height) = (sourceImage.Width, sourceImage.Height);
+            var output = new Bitmap(imageBuffer.Width, imageBuffer.Height);
+            var kernel = new float[kernelSize, kernelSize];
 
-            BitmapData srcData = sourceImage.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            for (var i = 0; i < kernel.GetLength(0); i++)
+                for (var j = 0; j < kernel.GetLength(1); j++)
+                    kernel[i, j] = 1.0f / kernel.Length;
 
-            int bytes = srcData.Stride * srcData.Height;
-            var (buffer, result) = (new byte[bytes], new byte[bytes]);
+            var offset = kernel.GetLength(0) / 2;
+            var extendedMatrix = ImageUtils.GetExtendedByKernelImageMatrix(
+                ImageUtils.GetImageMatrix(image), kernel.GetLength(0));
 
-            Marshal.Copy(srcData.Scan0, buffer, 0, bytes);
-            sourceImage.UnlockBits(srcData);
-
-            var colorChannels = 3;
-            var rgb = new double[colorChannels];
-
-            var foff = (kernel.GetLength(0) - 1) / 2;
-            var (kcenter, kpixel) = (0, 0);
-
-            for (var y = foff; y < height - foff; y++)
+            for (var i = offset; i < extendedMatrix.GetLength(0) - offset; i++)
             {
-                for (var x = foff; x < width - foff; x++)
+                for (var j = offset; j < extendedMatrix.GetLength(1) - offset; j++)
                 {
-                    for (var c = 0; c < colorChannels; c++)
-                        rgb[c] = 0.0;
+                    var (red, green, blue) = (0f, 0f, 0f);
+                    var alpha = ImageUtils.DecomposeColor(extendedMatrix[i, j]).a;
+                    var (iBuffer, jBuffer) = (i - offset, j - offset);
 
-                    kcenter = y * srcData.Stride + x * 4;
-
-                    for (var fy = -foff; fy <= foff; fy++)
-                        for (var fx = -foff; fx <= foff; fx++)
+                    for (var x = i - offset; x <= i + offset; x++)
+                        for (var y = j - offset; y <= j + offset; y++)
                         {
-                            kpixel = kcenter + fy * srcData.Stride + fx * 4;
-                            for (var c = 0; c < colorChannels; c++)
-                                rgb[c] += buffer[kpixel + c] * kernel[fy + foff, fx + foff];
+                            var (_, r, g, b) = ImageUtils.DecomposeColor(extendedMatrix[x, y]);
+                            red += r * kernel[x - iBuffer, y - jBuffer];
+                            green += g * kernel[x - iBuffer, y - jBuffer];
+                            blue += b * kernel[x - iBuffer, y - jBuffer];
                         }
 
-                    for (var c = 0; c < colorChannels; c++)
-                    {
-                        if (rgb[c] > 255)
-                            rgb[c] = 255;
-                        else if (rgb[c] < 0)
-                            rgb[c] = 0;
-                    }
-
-                    for (var c = 0; c < colorChannels; c++)
-                        result[kcenter + c] = (byte)rgb[c];
-
-                    result[kcenter + 3] = 255;
+                    ImageUtils.ControlChannelsOverflow(ref red, ref green, ref blue);
+                    output.SetPixel(j - offset, i - offset, ImageUtils.ComposeColor((alpha, (int)red, (int)green, (int)blue)));
                 }
 
-                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)y / (height - foff)));
+                backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / output.Height));
             }
 
-            Bitmap resultImage = new Bitmap(width, height);
-            BitmapData resultData = resultImage.LockBits(new Rectangle(0, 0, width, height),
-                ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
-
-            Marshal.Copy(result, 0, resultData.Scan0, bytes);
-            resultImage.UnlockBits(resultData);
-
-            return resultImage;
-        }
-
-        private double[,] GetGaussianKernel(int length, double weight)
-        {
-            var kernel = new double[length, length];
-            var kernelSum = 0d;
-            var foff = (length - 1) / 2;
-
-            var distance = 0d;
-            var constant = 1d / (2 * Math.PI * weight * weight);
-
-            for (var y = -foff; y <= foff; y++)
-                for (var x = -foff; x <= foff; x++)
-                {
-                    distance = ((y * y) + (x * x)) / (2 * weight * weight);
-                    kernel[y + foff, x + foff] = constant * Math.Exp(-distance);
-                    kernelSum += kernel[y + foff, x + foff];
-                }
-
-            for (var y = 0; y < length; y++)
-                for (var x = 0; x < length; x++)
-                    kernel[y, x] = kernel[y, x] * 1d / kernelSum;
-
-            return kernel;
-        }
-
-        private void PowerTextBoxChanged(object sender, EventArgs e) =>
-            ValidateDoubleInput((TextBox)sender);
-
-        private void ValidateDoubleInput(TextBox sender)
-        {
-            var line = sender.Text;
-
-            if (double.TryParse(line, out double value))
-            {
-                if (value <= 0d || value > 10d)
-                    errorProvider.SetError(textBox2, "Значение должно принадлежать отрезку: [0, 10]");
-                else
-                    errorProvider.Clear();
-
-                return;
-            }
-
-            errorProvider.SetError(textBox2, "Неверный формат числа");
+            return output;
         }
 
         private void BackButtonClicked(object sender, EventArgs e)

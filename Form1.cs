@@ -60,6 +60,9 @@ namespace FilterGenerator
 
         private void ProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
+            if (e.ProgressPercentage > 100)
+                return;
+
             progressBar.Value = e.ProgressPercentage;
 
             if (progressBar.Value > 1)
@@ -84,7 +87,7 @@ namespace FilterGenerator
             if (currentImage == null)
             {
                 MessageBox.Show(
-                    "Сначала выберите изображение",
+                    "Сначала выберите изображение.",
                     "Ошибка фильтрации",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -95,7 +98,7 @@ namespace FilterGenerator
             if (worker.IsBusy)
             {
                 MessageBox.Show(
-                    "Дождитесь обработки изображения",
+                    "Дождитесь обработки изображения.",
                     "Предупреждение",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -133,7 +136,7 @@ namespace FilterGenerator
             if (currentImage == null)
             {
                 MessageBox.Show(
-                    "Нечего сохранять: изображение не выбрано",
+                    "Нечего сохранять: изображение не выбрано.",
                     "Ошибка сохранения",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);

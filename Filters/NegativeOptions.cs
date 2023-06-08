@@ -27,7 +27,7 @@ namespace FilterGenerator
                 for (var j = 0; j < input.Width; j++)
                 {
                     var (alpha, red, green, blue)
-                        = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb());
+                        = ImageUtils.DecomposeColor(input.GetPixel(j, i).ToArgb());
 
                     if (redCheck.Checked) red = 255 - red;
                     if (greenCheck.Checked) green = 255 - green;

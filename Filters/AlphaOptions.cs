@@ -27,7 +27,7 @@ namespace FilterGenerator
                 for (var j = 0; j < input.Width; j++)
                 {
                     var alphaValue = 255 - (float)trackbarValue / 100 * 255;
-                    var (_, red, green, blue) = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb());
+                    var (_, red, green, blue) = ImageUtils.DecomposeColor(input.GetPixel(j, i).ToArgb());
                     var newPixel = ImageUtils.ComposeColor(((int)alphaValue, red, green, blue));
                     output.SetPixel(j, i, newPixel);
                 }

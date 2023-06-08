@@ -42,7 +42,7 @@ namespace FilterGenerator
             const int length = 10;
             var value = 100 / length * contrast;
 
-            var (alpha, red, green, blue) = ImageUtils.DecomposeColor((uint)initialPixelColor.ToArgb());
+            var (alpha, red, green, blue) = ImageUtils.DecomposeColor(initialPixelColor.ToArgb());
 
             if (value >= 0)
             {

@@ -14,12 +14,24 @@
         const int GREENSHIFT = 8;
         const int BLUESHIFT = 0;
 
-        public static int[,] GetExtendedByKernelImageMatrix(int[,] initialMatrix, int[,] kernel)
+        public static int[,] GetImageMatrix(Image image)
+        {
+            var input = new Bitmap(image);
+            var matrix = new int[input.Height, input.Width];
+
+            for (var i = 0; i < input.Height; i++)
+                for (var j = 0; j < input.Width; j++)
+                    matrix[i, j] = input.GetPixel(j, i).ToArgb();
+
+            return matrix;
+        }
+
+        public static int[,] GetExtendedByKernelImageMatrix(int[,] initialMatrix, int kernelSize)
         {
             var initialRows = initialMatrix.GetLength(0);
             var initialColumns = initialMatrix.GetLength(1);
 
-            var offset = kernel.GetLength(0) / 2;
+            var offset = kernelSize / 2;
             var extendedMatrix = new int[initialRows + offset * 2, initialColumns + offset * 2];
 
             var extendedRows = extendedMatrix.GetLength(0);
@@ -38,10 +50,10 @@
                 }
 
             for (var i = 0; i < offset; i++)
-                for (var j = offset; j < extendedRows - offset; j++)
+                for (var j = offset; j < extendedColumns - offset; j++)
                 {
                     extendedMatrix[i, j] = initialMatrix[0, j - offset];
-                    extendedMatrix[extendedColumns - i - 1, j]
+                    extendedMatrix[extendedRows - i - 1, j]
                         = initialMatrix[initialRows - 1, j - offset];
                 }
 
@@ -49,7 +61,7 @@
                 for (var j = 0; j < offset; j++)
                 {
                     extendedMatrix[i, j] = initialMatrix[0, 0];
-                    extendedMatrix[i, extendedRows - j - 1] =
+                    extendedMatrix[i, extendedColumns - j - 1] =
                         initialMatrix[0, initialColumns - 1];
                     extendedMatrix[extendedRows - i - 1, j] =
                         initialMatrix[initialRows - 1, 0];
@@ -60,7 +72,7 @@
             return extendedMatrix;
         }
 
-        public static (int a, int r, int g, int b) DecomposeColor(uint colorInteger)
+        public static (int a, int r, int g, int b) DecomposeColor(int colorInteger)
         {
             return ((int)(colorInteger & ALPHAMASK) >> ALPHASHIFT,
                 (int)(colorInteger & REDMASK) >> REDSHIFT,
@@ -86,6 +98,16 @@
             if (green < 0) green = 0;   
             if (blue > 255) blue = 255;
             if (blue < 0) blue = 0; 
+        }
+
+        public static void ControlChannelsOverflow(ref float red, ref float green, ref float blue)
+        {
+            if (red > 255) red = 255;
+            if (red < 0) red = 0;
+            if (green > 255) green = 255;
+            if (green < 0) green = 0;
+            if (blue > 255) blue = 255;
+            if (blue < 0) blue = 0;
         }
     }
 }

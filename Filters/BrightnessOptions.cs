@@ -42,7 +42,7 @@ namespace FilterGenerator
             const int length = 10;
             var increment = 100 / length * brightness * 1.28f;
 
-            var (alpha, red, green, blue) = ImageUtils.DecomposeColor((uint)initialPixelColor.ToArgb());
+            var (alpha, red, green, blue) = ImageUtils.DecomposeColor(initialPixelColor.ToArgb());
 
             red += (int)increment;
             green += (int)increment;

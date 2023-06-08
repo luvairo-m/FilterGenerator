@@ -172,14 +172,14 @@
             // fileToolStripMenuItem
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openNewToolStripMenuItem, saveCurrentToolStripMenuItem, clearSpaceToolStripMenuItem });
-            fileToolStripMenuItem.Image = Properties.Resources.file_operations_image;
+            fileToolStripMenuItem.Image = Properties.Resources.open_folder;
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(75, 25);
             fileToolStripMenuItem.Text = "Файл";
             // 
             // openNewToolStripMenuItem
             // 
-            openNewToolStripMenuItem.Image = Properties.Resources.open_image;
+            openNewToolStripMenuItem.Image = Properties.Resources.open_file;
             openNewToolStripMenuItem.Name = "openNewToolStripMenuItem";
             openNewToolStripMenuItem.Size = new Size(208, 26);
             openNewToolStripMenuItem.Text = "Открыть";
@@ -187,15 +187,15 @@
             // 
             // saveCurrentToolStripMenuItem
             // 
-            saveCurrentToolStripMenuItem.Image = Properties.Resources.save_as_image;
+            saveCurrentToolStripMenuItem.Image = Properties.Resources.save;
             saveCurrentToolStripMenuItem.Name = "saveCurrentToolStripMenuItem";
             saveCurrentToolStripMenuItem.Size = new Size(208, 26);
-            saveCurrentToolStripMenuItem.Text = "Сохранить";
+            saveCurrentToolStripMenuItem.Text = "Сохранить как";
             saveCurrentToolStripMenuItem.Click += SaveMenuItemClicked;
             // 
             // clearSpaceToolStripMenuItem
             // 
-            clearSpaceToolStripMenuItem.Image = Properties.Resources.clear_image;
+            clearSpaceToolStripMenuItem.Image = Properties.Resources.clear;
             clearSpaceToolStripMenuItem.Name = "clearSpaceToolStripMenuItem";
             clearSpaceToolStripMenuItem.Size = new Size(208, 26);
             clearSpaceToolStripMenuItem.Text = "Очистить область";
@@ -204,14 +204,14 @@
             // sizeModToolStripMenuItem
             // 
             sizeModToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { stretchToolStripMenuItem, zoomToolStripMenuItem });
-            sizeModToolStripMenuItem.Image = Properties.Resources.size_image;
+            sizeModToolStripMenuItem.Image = Properties.Resources.scale;
             sizeModToolStripMenuItem.Name = "sizeModToolStripMenuItem";
             sizeModToolStripMenuItem.Size = new Size(173, 25);
             sizeModToolStripMenuItem.Text = "Машстабирование";
             // 
             // stretchToolStripMenuItem
             // 
-            stretchToolStripMenuItem.Image = Properties.Resources.fit_image;
+            stretchToolStripMenuItem.Image = Properties.Resources.maximaze;
             stretchToolStripMenuItem.Name = "stretchToolStripMenuItem";
             stretchToolStripMenuItem.Size = new Size(215, 26);
             stretchToolStripMenuItem.Text = "Вытягивание";
@@ -219,7 +219,7 @@
             // 
             // zoomToolStripMenuItem
             // 
-            zoomToolStripMenuItem.Image = Properties.Resources.zoom_image;
+            zoomToolStripMenuItem.Image = Properties.Resources.zoom;
             zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
             zoomToolStripMenuItem.Size = new Size(215, 26);
             zoomToolStripMenuItem.Text = "Пропорционально";

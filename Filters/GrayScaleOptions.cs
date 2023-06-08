@@ -22,7 +22,7 @@ namespace FilterGenerator
                 || blueErrorProvider.GetError(blueWeight) != string.Empty)
             {
                 MessageBox.Show(
-                    "Неверные настройки фильтра",
+                    "Неверные настройки фильтра.",
                     "Ошибка фильтрации",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -44,7 +44,7 @@ namespace FilterGenerator
             {
                 for (var j = 0; j < bitmap.Width; j++)
                 {
-                    var (alpha, red, green, blue) = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb());
+                    var (alpha, red, green, blue) = ImageUtils.DecomposeColor(input.GetPixel(j, i).ToArgb());
                     var value = (int)(rWeight * red + gWeight * green + bWeight * blue);
                     var newPixel = ImageUtils.ComposeColor((alpha, value, value, value));
                     bitmap.SetPixel(j, i, newPixel);

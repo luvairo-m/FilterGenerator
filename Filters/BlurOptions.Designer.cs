@@ -32,9 +32,10 @@
             errorProvider = new ErrorProvider(components);
             groupBox1 = new GroupBox();
             tableLayoutPanel1 = new TableLayoutPanel();
-            label1 = new Label();
-            textBox2 = new TextBox();
             button = new Button();
+            middleBlurRadio = new RadioButton();
+            highBlurRadio = new RadioButton();
+            lowBlurRadio = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
             groupBox1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -62,9 +63,10 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.7839031F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 66.1726151F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.043478F));
-            tableLayoutPanel1.Controls.Add(label1, 0, 0);
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 0);
             tableLayoutPanel1.Controls.Add(button, 2, 2);
+            tableLayoutPanel1.Controls.Add(middleBlurRadio, 0, 1);
+            tableLayoutPanel1.Controls.Add(highBlurRadio, 0, 2);
+            tableLayoutPanel1.Controls.Add(lowBlurRadio, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 21);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -74,33 +76,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.Size = new Size(478, 237);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Left;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(15, 0);
-            label1.Margin = new Padding(15, 0, 0, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(83, 78);
-            label1.TabIndex = 0;
-            label1.Text = "Сила размытия:";
-            label1.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // textBox2
-            // 
-            textBox2.Dock = DockStyle.Left;
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.Location = new Point(102, 8);
-            textBox2.Margin = new Padding(3, 8, 3, 3);
-            textBox2.MaxLength = 10;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 29);
-            textBox2.TabIndex = 5;
-            textBox2.Text = "5";
-            textBox2.TextAlign = HorizontalAlignment.Center;
-            textBox2.TextChanged += PowerTextBoxChanged;
             // 
             // button
             // 
@@ -112,6 +87,52 @@
             button.Text = "Отменить";
             button.UseVisualStyleBackColor = true;
             button.Click += BackButtonClicked;
+            // 
+            // middleBlurRadio
+            // 
+            middleBlurRadio.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(middleBlurRadio, 2);
+            middleBlurRadio.Dock = DockStyle.Fill;
+            middleBlurRadio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            middleBlurRadio.Location = new Point(15, 81);
+            middleBlurRadio.Margin = new Padding(15, 3, 3, 3);
+            middleBlurRadio.Name = "middleBlurRadio";
+            middleBlurRadio.Size = new Size(397, 72);
+            middleBlurRadio.TabIndex = 7;
+            middleBlurRadio.TabStop = true;
+            middleBlurRadio.Text = "Среднее размытие";
+            middleBlurRadio.UseVisualStyleBackColor = true;
+            // 
+            // highBlurRadio
+            // 
+            highBlurRadio.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(highBlurRadio, 2);
+            highBlurRadio.Dock = DockStyle.Fill;
+            highBlurRadio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            highBlurRadio.Location = new Point(15, 159);
+            highBlurRadio.Margin = new Padding(15, 3, 3, 3);
+            highBlurRadio.Name = "highBlurRadio";
+            highBlurRadio.Size = new Size(397, 75);
+            highBlurRadio.TabIndex = 8;
+            highBlurRadio.TabStop = true;
+            highBlurRadio.Text = "Сильное размытие";
+            highBlurRadio.UseVisualStyleBackColor = true;
+            // 
+            // lowBlurRadio
+            // 
+            lowBlurRadio.AutoSize = true;
+            lowBlurRadio.Checked = true;
+            tableLayoutPanel1.SetColumnSpan(lowBlurRadio, 2);
+            lowBlurRadio.Dock = DockStyle.Fill;
+            lowBlurRadio.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lowBlurRadio.Location = new Point(15, 3);
+            lowBlurRadio.Margin = new Padding(15, 3, 3, 3);
+            lowBlurRadio.Name = "lowBlurRadio";
+            lowBlurRadio.Size = new Size(397, 72);
+            lowBlurRadio.TabIndex = 9;
+            lowBlurRadio.TabStop = true;
+            lowBlurRadio.Text = "Слабое размытие";
+            lowBlurRadio.UseVisualStyleBackColor = true;
             // 
             // BlurOptions
             // 
@@ -132,8 +153,9 @@
         private ErrorProvider errorProvider;
         private GroupBox groupBox1;
         private TableLayoutPanel tableLayoutPanel1;
-        private Label label1;
-        private TextBox textBox2;
         private Button button;
+        private RadioButton middleBlurRadio;
+        private RadioButton highBlurRadio;
+        private RadioButton lowBlurRadio;
     }
 }

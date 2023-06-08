@@ -26,14 +26,14 @@ namespace FilterGenerator
             {
                 for (var j = 1; j < input.Width - 1; j++)
                 {
-                    var alpha = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb()).a;
+                    var alpha = ImageUtils.DecomposeColor(input.GetPixel(j, i).ToArgb()).a;
                     var (r, g, b) = (0, 0, 0);
 
                     for (var x = i - 1; x <= i + 1; x++)
                         for (var y = j - 1; y <= j + 1; y++)
                         {
                             var (_, red, green, blue) 
-                                = ImageUtils.DecomposeColor((uint)input.GetPixel(y, x).ToArgb());
+                                = ImageUtils.DecomposeColor(input.GetPixel(y, x).ToArgb());
 
                             int coefficient;
                             if (x == i && y == j) coefficient = 9;
