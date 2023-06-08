@@ -1,3 +1,4 @@
+using FilterGenerator.Filters;
 using FilterGenerator.Properties;
 using System.ComponentModel;
 

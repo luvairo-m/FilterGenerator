@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using FilterGenerator.Extra;
+using FilterGenerator.Filters;
 
 namespace FilterGenerator
 {
@@ -42,18 +44,10 @@ namespace FilterGenerator
             {
                 for (var j = 0; j < bitmap.Width; j++)
                 {
-                    var pixel = input.GetPixel(j, i).ToArgb();
-
-                    var alpha = (float)((pixel & 0xFF000000) >> 24);
-                    var red = (float)((pixel & 0x00FF0000) >> 16);
-                    var green = (float)((pixel & 0x0000FF00) >> 8);
-                    var blue = (float)(pixel & 0x000000FF);
-
-                    red = green = blue = rWeight * red + gWeight * green + bWeight * blue;
-
-                    var filteredPixel = 0x00000000 |
-                        ((uint)alpha << 24) | ((uint)red << 16) | ((uint)green << 8) | ((uint)blue);
-                    bitmap.SetPixel(j, i, Color.FromArgb((int)filteredPixel));
+                    var (alpha, red, green, blue) = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb());
+                    var value = (int)(rWeight * red + gWeight * green + bWeight * blue);
+                    var newPixel = ImageUtils.ComposeColor((alpha, value, value, value));
+                    bitmap.SetPixel(j, i, newPixel);
                 }
 
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));

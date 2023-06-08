@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using FilterGenerator.Extra;
+using FilterGenerator.Filters;
 
 namespace FilterGenerator
 {
@@ -24,10 +26,10 @@ namespace FilterGenerator
             {
                 for (var j = 0; j < input.Width; j++)
                 {
-                    var pixel = 0x00FFFFFF & (uint)input.GetPixel(j, i).ToArgb();
                     var alphaValue = 255 - (float)trackbarValue / 100 * 255;
-                    var newPixel = (uint)((int)alphaValue << 24) | pixel;
-                    output.SetPixel(j, i, Color.FromArgb((int)newPixel));
+                    var (_, red, green, blue) = ImageUtils.DecomposeColor((uint)input.GetPixel(j, i).ToArgb());
+                    var newPixel = ImageUtils.ComposeColor(((int)alphaValue, red, green, blue));
+                    output.SetPixel(j, i, newPixel);
                 }
 
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / output.Height));

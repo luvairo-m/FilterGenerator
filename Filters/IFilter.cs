@@ -1,4 +1,4 @@
-﻿namespace FilterGenerator
+﻿namespace FilterGenerator.Filters
 {
     public interface IFilter
     {

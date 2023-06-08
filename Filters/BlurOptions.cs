@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using FilterGenerator.Filters;
 
 namespace FilterGenerator
 {

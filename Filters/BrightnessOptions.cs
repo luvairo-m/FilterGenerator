@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using FilterGenerator.Extra;
+using FilterGenerator.Filters;
 
 namespace FilterGenerator
 {
@@ -24,9 +26,7 @@ namespace FilterGenerator
             for (var i = 0; i < input.Height; i++)
             {
                 for (var j = 0; j < input.Width; j++)
-                    bitmap.SetPixel(j, i,
-                        Color.FromArgb((int)ChangePixelBrightness((uint)input.GetPixel(j, i).ToArgb(),
-                        brightness)));
+                    bitmap.SetPixel(j, i, GetChangedPixelColor(input.GetPixel(j, i), brightness));
 
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));
             }
@@ -37,26 +37,20 @@ namespace FilterGenerator
             return bitmap;
         }
 
-        private uint ChangePixelBrightness(uint point, int brightness)
+        private Color GetChangedPixelColor(Color initialPixelColor, int brightness)
         {
             const int length = 10;
-            var value = 100 / length * brightness;
+            var increment = 100 / length * brightness * 1.28f;
 
-            int r, g, b;
+            var (alpha, red, green, blue) = ImageUtils.DecomposeColor((uint)initialPixelColor.ToArgb());
 
-            r = (int)(((point & 0x00FF0000) >> 16) + value * 128 / 100);
-            g = (int)(((point & 0x0000FF00) >> 8) + value * 128 / 100);
-            b = (int)((point & 0x000000FF) + value * 128 / 100);
+            red += (int)increment;
+            green += (int)increment;
+            blue += (int)increment;
 
-            if (r < 0) r = 0;
-            if (r > 255) r = 255;
-            if (g < 0) g = 0;
-            if (g > 255) g = 255;
-            if (b < 0) b = 0;
-            if (b > 255) b = 255;
+            ImageUtils.ControlChannelsOverflow(ref red, ref green, ref blue);    
 
-            point = 0xFF000000 | ((uint)r << 16) | ((uint)g << 8) | ((uint)b);
-            return point;
+            return ImageUtils.ComposeColor((alpha, red, green, blue));
         }
 
         private void TrackBarScrolled(object sender, EventArgs e)
