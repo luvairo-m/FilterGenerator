@@ -125,6 +125,7 @@ namespace FilterGenerator
 
             currentImage = Image.FromFile(openFileDialog.FileName);
             pictureBox.Image = currentImage;
+            ComboboxSelectionChanged(comboBox1, new EventArgs());
         }
 
         private void SaveMenuItemClicked(object sender, EventArgs e)
