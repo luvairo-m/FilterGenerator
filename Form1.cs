@@ -193,7 +193,7 @@ namespace FilterGenerator
                 var href = (sender as ToolStripItem).Text;
                 Process.Start(new ProcessStartInfo(href) { UseShellExecute = true });
             }
-            catch { } 
+            catch { }
         }
 
         private void DeveloperItemClicked(object sender, EventArgs e)
