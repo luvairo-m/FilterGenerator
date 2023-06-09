@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>filter.ico</ApplicationIcon>
+    <ApplicationIcon>dragon-_1_.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="filter.ico" />
+    <Content Include="dragon-_1_.ico" />
   </ItemGroup>
 
   <ItemGroup>

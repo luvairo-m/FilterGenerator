@@ -150,6 +150,7 @@
             button2.FlatStyle = FlatStyle.Popup;
             button2.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
             button2.ForeColor = SystemColors.ControlLightLight;
+            button2.Image = Properties.Resources.flower;
             button2.Location = new Point(3, 52);
             button2.Margin = new Padding(3, 0, 3, 3);
             button2.Name = "button2";
