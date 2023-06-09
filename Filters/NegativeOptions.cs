@@ -39,8 +39,7 @@ namespace FilterGenerator
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / result.Height));
             }
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            GarbageCollectorUtils.ActivateGarbageCollection();
 
             return result;
         }

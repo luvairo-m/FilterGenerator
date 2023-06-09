@@ -31,8 +31,7 @@ namespace FilterGenerator
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / bitmap.Height));
             }
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+            GarbageCollectorUtils.ActivateGarbageCollection();
 
             return bitmap;
         }
