@@ -21,12 +21,8 @@ namespace FilterGenerator
                 || greenErrorProvider.GetError(greenWeight) != string.Empty
                 || blueErrorProvider.GetError(blueWeight) != string.Empty)
             {
-                MessageBox.Show(
-                    "Неверные настройки фильтра.",
-                    "Ошибка фильтрации",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
+                MessageBoxUtils.CreateErrorMessageBox("Неверные настройки фильтра",
+                    "Ошибка фильтрации");
                 return image;
             }
 

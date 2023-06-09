@@ -1,3 +1,4 @@
+using FilterGenerator.Extra;
 using FilterGenerator.Filters;
 using FilterGenerator.Properties;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace FilterGenerator
         private Form? currentFilter;
 
         private readonly Image defaultImage = Resources.alpha;
-        private const string fileMask = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png";
+        private const string fileMask = "JPG-файлы|*.jpg|PNG-файлы (*.png)|*.png|ICO-файлы|*.ico";
 
         private readonly Dictionary<string, Type> formTypes = new()
         {
@@ -33,10 +34,10 @@ namespace FilterGenerator
             comboBox1.SelectedIndex = 0;
 
             openFileDialog.Filter = fileMask;
-            openFileDialog.Title = "Image selecting";
+            openFileDialog.Title = "Выбор изображения";
 
             saveFileDialog.Filter = fileMask;
-            saveFileDialog.Title = "Image saving";
+            saveFileDialog.Title = "Сохранение изображения";
             saveFileDialog.AddExtension = true;
             saveFileDialog.OverwritePrompt = true;
 
@@ -88,23 +89,15 @@ namespace FilterGenerator
         {
             if (currentImage == null)
             {
-                MessageBox.Show(
-                    "Сначала выберите изображение.",
-                    "Ошибка фильтрации",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-
+                MessageBoxUtils.CreateErrorMessageBox("Сначала выберите изображение.",
+                    "Ошибка фильтрации");
                 return;
             }
 
             if (worker.IsBusy)
             {
-                MessageBox.Show(
-                    "Дождитесь обработки изображения.",
-                    "Предупреждение",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-
+                MessageBoxUtils.CreateWarningMessageBox("Дождитесь обработки изображения.",
+                    "Предупреждение");
                 return;
             }
 
@@ -125,37 +118,47 @@ namespace FilterGenerator
 
         private void OpenMenuItemClicked(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.Cancel)
-                return;
+            try
+            {
+                if (openFileDialog.ShowDialog() == DialogResult.Cancel)
+                    return;
 
-            currentImage = Image.FromFile(openFileDialog.FileName);
-            pictureBox.Image = currentImage;
-            ComboboxSelectionChanged(comboBox1, new EventArgs());
+                currentImage = Image.FromFile(openFileDialog.FileName);
+                pictureBox.Image = currentImage;
+                ComboboxSelectionChanged(comboBox1, new EventArgs());
+
+            }
+            catch
+            {
+                MessageBoxUtils.CreateErrorMessageBox("Неизвестная ошибка при открытии файла.",
+                    "Ошибка открытия");
+            }
         }
 
         private void SaveMenuItemClicked(object sender, EventArgs e)
         {
-            if (currentImage == null)
+            try
             {
-                MessageBox.Show(
-                    "Нечего сохранять: изображение не выбрано.",
-                    "Ошибка сохранения",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                if (currentImage == null)
+                {
+                    MessageBoxUtils.CreateErrorMessageBox("Нечего сохранять: изображение не выбрано.",
+                        "Ошибка сохранения");
+                    return;
+                }
 
-                return;
+                if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                    return;
+
+                currentImage.Save(saveFileDialog.FileName);
+
+                MessageBoxUtils.CreateInfoMessageBox("Изображение сохранено!",
+                    "Сохранение изображения");
             }
-
-            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
-                return;
-
-            currentImage.Save(saveFileDialog.FileName);
-
-            MessageBox.Show(
-                "Изображение сохранено!",
-                "Сохранение изображения",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            catch
+            {
+                MessageBoxUtils.CreateErrorMessageBox("Неизвестная ошибка при сохранении файла.",
+                    "Ошибка сохранения");
+            }
         }
 
         private void ClearMenuItemClicked(object sender, EventArgs e)
