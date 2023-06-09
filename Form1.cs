@@ -8,6 +8,8 @@ namespace FilterGenerator
 {
     public partial class Form1 : Form
     {
+        const string secretHref = "https://www.youtube.com/watch?v=V4Zt2hZLwcY";
+
         private BackgroundWorker worker = new();
 
         private Image? currentImage;
@@ -186,8 +188,21 @@ namespace FilterGenerator
 
         private void RepositoryHrefClicked(object sender, EventArgs e)
         {
-            var href = (sender as ToolStripItem).Text;
-            Process.Start(new ProcessStartInfo(href) { UseShellExecute = true });
+            try
+            {
+                var href = (sender as ToolStripItem).Text;
+                Process.Start(new ProcessStartInfo(href) { UseShellExecute = true });
+            }
+            catch { } 
+        }
+
+        private void DeveloperItemClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo(secretHref) { UseShellExecute = true });
+            }
+            catch { }
         }
     }
 }

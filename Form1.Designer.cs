@@ -170,9 +170,9 @@
             // 
             menuStrip2.Dock = DockStyle.Right;
             menuStrip2.Items.AddRange(new ToolStripItem[] { gitHubMenuItem });
-            menuStrip2.Location = new Point(888, 3);
+            menuStrip2.Location = new Point(855, 3);
             menuStrip2.Name = "menuStrip2";
-            menuStrip2.Size = new Size(93, 34);
+            menuStrip2.Size = new Size(126, 34);
             menuStrip2.TabIndex = 5;
             menuStrip2.Text = "menuStrip2";
             // 
@@ -182,7 +182,7 @@
             gitHubMenuItem.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             gitHubMenuItem.Image = Properties.Resources.github;
             gitHubMenuItem.Name = "gitHubMenuItem";
-            gitHubMenuItem.Size = new Size(80, 25);
+            gitHubMenuItem.Size = new Size(113, 25);
             gitHubMenuItem.Text = "GitHub";
             // 
             // разработчикTuzbubenToolStripMenuItem
@@ -191,6 +191,7 @@
             разработчикTuzbubenToolStripMenuItem.Name = "разработчикTuzbubenToolStripMenuItem";
             разработчикTuzbubenToolStripMenuItem.Size = new Size(393, 26);
             разработчикTuzbubenToolStripMenuItem.Text = "Разработчик: tuz-buben (aka luvairo)";
+            разработчикTuzbubenToolStripMenuItem.Click += DeveloperItemClicked;
             // 
             // httpsgithubcomluvairomFilterGeneratorToolStripMenuItem
             // 
