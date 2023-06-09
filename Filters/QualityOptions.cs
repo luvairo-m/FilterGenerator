@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using FilterGenerator.Extra;
+﻿using FilterGenerator.Extra;
 using FilterGenerator.Filters;
+using System.ComponentModel;
 
 namespace FilterGenerator
 {
@@ -32,7 +32,7 @@ namespace FilterGenerator
                     for (var x = i - 1; x <= i + 1; x++)
                         for (var y = j - 1; y <= j + 1; y++)
                         {
-                            var (_, red, green, blue) 
+                            var (_, red, green, blue)
                                 = ImageUtils.DecomposeColor(input.GetPixel(y, x).ToArgb());
 
                             int coefficient;

@@ -35,6 +35,10 @@
             tableLayoutPanel3 = new TableLayoutPanel();
             comboBox1 = new ComboBox();
             button2 = new Button();
+            menuStrip2 = new MenuStrip();
+            gitHubMenuItem = new ToolStripMenuItem();
+            разработчикTuzbubenToolStripMenuItem = new ToolStripMenuItem();
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             openNewToolStripMenuItem = new ToolStripMenuItem();
@@ -54,6 +58,7 @@
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
+            menuStrip2.SuspendLayout();
             menuStrip1.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             panel1.SuspendLayout();
@@ -67,6 +72,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 28.57143F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 71.42857F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 2);
+            tableLayoutPanel1.Controls.Add(menuStrip2, 1, 0);
             tableLayoutPanel1.Controls.Add(menuStrip1, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 2);
             tableLayoutPanel1.Controls.Add(panel1, 0, 1);
@@ -159,6 +165,40 @@
             button2.Text = "Применить";
             button2.UseVisualStyleBackColor = false;
             button2.Click += AcceptFilterButtonClicked;
+            // 
+            // menuStrip2
+            // 
+            menuStrip2.Dock = DockStyle.Right;
+            menuStrip2.Items.AddRange(new ToolStripItem[] { gitHubMenuItem });
+            menuStrip2.Location = new Point(888, 3);
+            menuStrip2.Name = "menuStrip2";
+            menuStrip2.Size = new Size(93, 34);
+            menuStrip2.TabIndex = 5;
+            menuStrip2.Text = "menuStrip2";
+            // 
+            // gitHubMenuItem
+            // 
+            gitHubMenuItem.DropDownItems.AddRange(new ToolStripItem[] { разработчикTuzbubenToolStripMenuItem, httpsgithubcomluvairomFilterGeneratorToolStripMenuItem });
+            gitHubMenuItem.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            gitHubMenuItem.Image = Properties.Resources.github;
+            gitHubMenuItem.Name = "gitHubMenuItem";
+            gitHubMenuItem.Size = new Size(80, 25);
+            gitHubMenuItem.Text = "GitHub";
+            // 
+            // разработчикTuzbubenToolStripMenuItem
+            // 
+            разработчикTuzbubenToolStripMenuItem.Image = Properties.Resources.coding;
+            разработчикTuzbubenToolStripMenuItem.Name = "разработчикTuzbubenToolStripMenuItem";
+            разработчикTuzbubenToolStripMenuItem.Size = new Size(393, 26);
+            разработчикTuzbubenToolStripMenuItem.Text = "Разработчик: tuz-buben (aka luvairo)";
+            // 
+            // httpsgithubcomluvairomFilterGeneratorToolStripMenuItem
+            // 
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem.Image = Properties.Resources.repository;
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem.Name = "httpsgithubcomluvairomFilterGeneratorToolStripMenuItem";
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem.Size = new Size(393, 26);
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem.Text = "https://github.com/luvairo-m/FilterGenerator";
+            httpsgithubcomluvairomFilterGeneratorToolStripMenuItem.Click += RepositoryHrefClicked;
             // 
             // menuStrip1
             // 
@@ -321,6 +361,8 @@
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
+            menuStrip2.ResumeLayout(false);
+            menuStrip2.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
@@ -354,5 +396,9 @@
         private Panel panel1;
         private PictureBox pictureBox;
         private ProgressBar progressBar;
+        private MenuStrip menuStrip2;
+        private ToolStripMenuItem gitHubMenuItem;
+        private ToolStripMenuItem разработчикTuzbubenToolStripMenuItem;
+        private ToolStripMenuItem httpsgithubcomluvairomFilterGeneratorToolStripMenuItem;
     }
 }

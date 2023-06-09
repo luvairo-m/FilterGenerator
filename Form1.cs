@@ -1,6 +1,7 @@
 using FilterGenerator.Filters;
 using FilterGenerator.Properties;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace FilterGenerator
 {
@@ -178,6 +179,12 @@ namespace FilterGenerator
             var toolItem = (ToolStripMenuItem)sender;
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             (zoomToolStripMenuItem.Checked, toolItem.Checked) = (false, true);
+        }
+
+        private void RepositoryHrefClicked(object sender, EventArgs e)
+        {
+            var href = (sender as ToolStripItem).Text;
+            Process.Start(new ProcessStartInfo(href) { UseShellExecute = true });
         }
     }
 }
