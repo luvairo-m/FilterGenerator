@@ -28,8 +28,7 @@ namespace FilterGenerator
                 {
                     var alphaValue = 255 - (float)trackbarValue / 100 * 255;
                     var (_, red, green, blue) = ImageUtils.DecomposeColor(input.GetPixel(j, i).ToArgb());
-                    var newPixel = ImageUtils.ComposeColor(((int)alphaValue, red, green, blue));
-                    output.SetPixel(j, i, newPixel);
+                    output.SetPixel(j, i, Color.FromArgb((int)alphaValue, red, green, blue));
                 }
 
                 backgroundWorker!.ReportProgress((int)Math.Round(100 * (double)i / output.Height));

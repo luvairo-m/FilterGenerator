@@ -204,5 +204,12 @@ namespace FilterGenerator
             }
             catch { }
         }
+
+        private void OnPaint(object sender, PaintEventArgs e)
+        {
+            var pictureBox = sender as PictureBox;
+            e.Graphics.DrawImage(defaultImage, new RectangleF(0, 0, pictureBox.Width, pictureBox.Height));
+            e.Graphics.DrawImage(pictureBox.Image, new RectangleF(0, 0, pictureBox.Width, pictureBox.Height));
+        }
     }
 }

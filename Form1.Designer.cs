@@ -327,6 +327,7 @@
             // 
             // pictureBox
             // 
+            pictureBox.BackColor = Color.Transparent;
             pictureBox.BorderStyle = BorderStyle.FixedSingle;
             pictureBox.Dock = DockStyle.Fill;
             pictureBox.Image = Properties.Resources.alpha;
@@ -338,6 +339,7 @@
             pictureBox.TabIndex = 1;
             pictureBox.TabStop = false;
             pictureBox.Tag = "default";
+            pictureBox.Paint += OnPaint;
             // 
             // openFileDialog
             // 
