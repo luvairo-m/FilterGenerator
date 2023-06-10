@@ -209,7 +209,23 @@ namespace FilterGenerator
         {
             var pictureBox = sender as PictureBox;
             e.Graphics.DrawImage(defaultImage, new RectangleF(0, 0, pictureBox.Width, pictureBox.Height));
-            e.Graphics.DrawImage(pictureBox.Image, new RectangleF(0, 0, pictureBox.Width, pictureBox.Height));
+
+            if (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage)
+                e.Graphics.DrawImage(pictureBox.Image, new RectangleF(0, 0, pictureBox.Width, pictureBox.Height));
+            else
+            {
+                var image = pictureBox.Image;
+
+                var coefficient = Math.Min((float)pictureBox.Width / pictureBox.Image.Width,
+                    (float)pictureBox.Height / pictureBox.Image.Height);
+                var x = pictureBox.Width / 2 - image.Width * coefficient / 2;
+                var y = pictureBox.Height / 2 - image.Height * coefficient / 2;
+
+                e.Graphics.DrawImage(pictureBox.Image,
+                    new RectangleF(x, y,
+                    pictureBox.Image.Width * coefficient,
+                    pictureBox.Image.Height * coefficient));
+            }
         }
     }
 }
